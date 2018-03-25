@@ -104,7 +104,7 @@
 				BA9A7A4F2065862D00050D46 /* LaunchScreen.storyboard */,
 				BA9A7A522065862D00050D46 /* Info.plist */,
 				BA9A7A462065862B00050D46 /* AppDelegate.swift */,
-				BA9A7A77206589AB00050D46 /* Extensions.swift */,
+				BA9A7A7B2068309400050D46 /* Utilis */,
 			);
 			path = Flache;
 			sourceTree = "<group>";
@@ -134,6 +134,14 @@
 				BA9A7A792065907200050D46 /* PreviewPhotoContainerView.swift */,
 			);
 			path = Camera;
+			sourceTree = "<group>";
+		};
+		BA9A7A7B2068309400050D46 /* Utilis */ = {
+			isa = PBXGroup;
+			children = (
+				BA9A7A77206589AB00050D46 /* Extensions.swift */,
+			);
+			path = Utilis;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
