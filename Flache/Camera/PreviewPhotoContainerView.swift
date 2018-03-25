@@ -67,7 +67,7 @@ class PreviewPhotoContainerView: UIView {
 				}, completion: { (completed) in
 					
 					UIView.animate(withDuration: 0.5, delay: 0.70, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
-						savedLabel.layer.transform = CATransform3DMakeScale(0.1, 0.1, 0.1)
+						savedLabel.layer.transform = CATransform3DMakeScale(0.01, 0.01, 0.01)
 					}, completion: { (_) in
 						savedLabel.removeFromSuperview()
 						self.removeFromSuperview()
