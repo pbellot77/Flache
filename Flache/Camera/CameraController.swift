@@ -23,7 +23,7 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
 	
 	let capturePhotoButton: UIButton = {
 		let button = UIButton(type: .system)
-		button.setImage(#imageLiteral(resourceName: "capture_photo"), for: .normal)
+		button.setImage(#imageLiteral(resourceName: "CameraButton"), for: .normal)
 		button.addTarget(self, action: #selector(handleCapturePhoto), for: .touchUpInside)
 		return button
 	}()
