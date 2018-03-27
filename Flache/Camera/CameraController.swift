@@ -62,11 +62,16 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
 	
 	fileprivate func setupHUD() {
 		view.addSubview(capturePhotoButton)
-		capturePhotoButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 24, paddingRight: 0, width: 100, height: 100)
+		capturePhotoButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor,
+															right: nil, paddingTop: 0, paddingLeft: 0,
+															paddingBottom: 24, paddingRight: 0, width: 100, height: 100)
 		capturePhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		
 		view.addSubview(switchCameraButton)
-		switchCameraButton.anchor(top: nil, left: capturePhotoButton.rightAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 15, paddingBottom: 48, paddingRight: 0, width: 50, height: 50)
+		switchCameraButton.anchor(top: nil, left: capturePhotoButton.rightAnchor,
+															bottom: view.bottomAnchor, right: nil,
+															paddingTop: 0, paddingLeft: 15, paddingBottom: 48,
+															paddingRight: 0, width: 50, height: 50)
 		
 		let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoom(pinch:)))
 		view.addGestureRecognizer(pinchGesture)
@@ -102,7 +107,10 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
 		
 		containerView.previewImageView.image = previewImage
 		view.addSubview(containerView)
-		containerView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+		containerView.anchor(top: view.topAnchor, left: view.leftAnchor,
+												 bottom: view.bottomAnchor, right: view.rightAnchor,
+												 paddingTop: 0, paddingLeft: 0, paddingBottom: 0,
+												 paddingRight: 0, width: 0, height: 0)
 	}
 	
 	// MARK: -- Selector methods
@@ -142,7 +150,6 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
 				print("Could not setup zoom:", err)
 			}
 		}
-		
 		let newScaleFactor = minMaxZoom(pinch.scale * zoomFactor)
 		
 		switch pinch.state {
