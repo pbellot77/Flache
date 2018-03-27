@@ -13,13 +13,23 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
 	
 	// MARK: -- Properties
 	let output = AVCapturePhotoOutput()
-	let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
 	
+	var backCamera: AVCaptureDevice?
+	var frontCamera: AVCaptureDevice?
+	var captureDevice: AVCaptureDevice?
+	
+	var toggleCamera = false
 	var zoomFactor: CGFloat = 1.0
+	var flashMode = AVCaptureDevice.FlashMode.off
 	
 	override var prefersStatusBarHidden: Bool {
 		return true
 	}
+	
+	lazy var captureSession: AVCaptureSession = {
+		let capture = AVCaptureSession()
+		return capture
+	}()
 	
 	let capturePhotoButton: UIButton = {
 		let button = UIButton(type: .system)
@@ -28,26 +38,41 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
 		return button
 	}()
 	
+	let switchCameraButton: UIButton = {
+		let button = UIButton(type: .system)
+		button.setImage(#imageLiteral(resourceName: "SwitchCamera"), for: .normal)
+		button.addTarget(self, action: #selector(handleCameraToggle), for: .touchUpInside)
+		return button
+	}()
+	
 	override func loadView() {
 		super.loadView()
 		
+		setupInputs()
 		setupCaptureSession()
 		setupHUD()
 	}
 
 	// MARK: -- Private Functions
+	fileprivate func setupInputs() {
+		backCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
+		frontCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
+		captureDevice = backCamera
+	}
+	
 	fileprivate func setupHUD() {
 		view.addSubview(capturePhotoButton)
 		capturePhotoButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 24, paddingRight: 0, width: 100, height: 100)
 		capturePhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+		
+		view.addSubview(switchCameraButton)
+		switchCameraButton.anchor(top: nil, left: capturePhotoButton.rightAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 15, paddingBottom: 48, paddingRight: 0, width: 50, height: 50)
 		
 		let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoom(pinch:)))
 		view.addGestureRecognizer(pinchGesture)
 	}
 	
 	fileprivate func setupCaptureSession() {
-		let captureSession = AVCaptureSession()
-		
 		do {
 			let input = try AVCaptureDeviceInput(device: captureDevice!)
 			if captureSession.canAddInput(input) {
@@ -88,6 +113,22 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
 		settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewFormatType]
 		
 		output.capturePhoto(with: settings, delegate: self)
+	}
+	
+	@objc func handleCameraToggle() {
+		captureSession.beginConfiguration()
+		captureDevice = toggleCamera ? backCamera : frontCamera
+		toggleCamera = !toggleCamera
+		captureSession.inputs.forEach { captureSession.removeInput($0) }
+		do {
+			let newInput = try AVCaptureDeviceInput(device: captureDevice!)
+			if captureSession.canAddInput(newInput) {
+				captureSession.addInput(newInput)
+			}
+		} catch let err {
+			print("Could not toggle camera:", err)
+		}
+		captureSession.commitConfiguration()
 	}
 	
 	@objc func zoom(pinch: UIPinchGestureRecognizer){
