@@ -86,15 +86,12 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
 		} catch let err {
 			print("Could not setup camera input:", err)
 		}
-		
 		if captureSession.canAddOutput(output){
 			captureSession.addOutput(output)
 		}
-		
 		let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
 		previewLayer.frame = view.frame
 		view.layer.addSublayer(previewLayer)
-		
 		captureSession.startRunning()
 	}
 	
@@ -105,7 +102,12 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
 		let previewImage = UIImage(data: imageData)
 		let containerView = PreviewPhotoContainerView()
 		
-		containerView.previewImageView.image = previewImage
+		if captureDevice?.position == .front {
+			let mirroredImage = flipImage(image: previewImage!)
+			containerView.previewImageView.image = mirroredImage
+		} else {
+			containerView.previewImageView.image = previewImage
+		}
 		view.addSubview(containerView)
 		containerView.anchor(top: view.topAnchor, left: view.leftAnchor,
 												 bottom: view.bottomAnchor, right: view.rightAnchor,
@@ -113,13 +115,17 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
 												 paddingRight: 0, width: 0, height: 0)
 	}
 	
+	func flipImage(image: UIImage) -> UIImage {
+		guard let cgImage = image.cgImage else { return image }
+		let flippedImage = UIImage(cgImage: cgImage, scale: image.scale, orientation: .leftMirrored)
+		return flippedImage
+	}
+	
 	// MARK: -- Selector methods
 	@objc func handleCapturePhoto() {
 		let settings = AVCapturePhotoSettings()
-		
 		guard let previewFormatType = settings.availablePreviewPhotoPixelFormatTypes.first else { return }
 		settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewFormatType]
-		
 		output.capturePhoto(with: settings, delegate: self)
 	}
 	
@@ -135,6 +141,9 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
 			}
 		} catch let err {
 			print("Could not toggle camera:", err)
+		}
+		if captureSession.canAddOutput(output) {
+			captureSession.addOutput(output)
 		}
 		captureSession.commitConfiguration()
 	}
