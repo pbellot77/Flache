@@ -20,7 +20,6 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
 	
 	var toggleCamera = false
 	var zoomFactor: CGFloat = 1.0
-	var flashMode = AVCaptureDevice.FlashMode.off
 	
 	override var prefersStatusBarHidden: Bool {
 		return true
@@ -68,10 +67,10 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
 		capturePhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		
 		view.addSubview(switchCameraButton)
-		switchCameraButton.anchor(top: nil, left: capturePhotoButton.rightAnchor,
-															bottom: view.bottomAnchor, right: nil,
-															paddingTop: 0, paddingLeft: 15, paddingBottom: 48,
-															paddingRight: 0, width: 50, height: 50)
+		switchCameraButton.anchor(top: nil, left: nil,
+															bottom: view.bottomAnchor, right: view.rightAnchor,
+															paddingTop: 0, paddingLeft: 0, paddingBottom: 48,
+															paddingRight: 16, width: 50, height: 50)
 		
 		let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoom(pinch:)))
 		view.addGestureRecognizer(pinchGesture)
