@@ -60,13 +60,13 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
 	}
 	
 	fileprivate func setupHUD() {
-		view.addSubview(capturePhotoButton)
+		view.add(capturePhotoButton)
 		capturePhotoButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor,
 															right: nil, paddingTop: 0, paddingLeft: 0,
 															paddingBottom: 24, paddingRight: 0, width: 100, height: 100)
 		capturePhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		
-		view.addSubview(switchCameraButton)
+		view.add(switchCameraButton)
 		switchCameraButton.anchor(top: nil, left: nil,
 															bottom: view.bottomAnchor, right: view.rightAnchor,
 															paddingTop: 0, paddingLeft: 0, paddingBottom: 48,
@@ -107,7 +107,7 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
 		} else {
 			containerView.previewImageView.image = previewImage
 		}
-		view.addSubview(containerView)
+		view.add(containerView)
 		containerView.anchor(top: view.topAnchor, left: view.leftAnchor,
 												 bottom: view.bottomAnchor, right: view.rightAnchor,
 												 paddingTop: 0, paddingLeft: 0, paddingBottom: 0,
