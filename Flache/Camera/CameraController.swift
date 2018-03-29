@@ -13,6 +13,7 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
 	
 	// MARK: -- Properties
 	let output = AVCapturePhotoOutput()
+	let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoom(pinch:)))
 	
 	var backCamera: AVCaptureDevice?
 	var frontCamera: AVCaptureDevice?
@@ -60,19 +61,18 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
 	}
 	
 	fileprivate func setupHUD() {
-		view.addSubview(capturePhotoButton)
+		view.add(capturePhotoButton)
 		capturePhotoButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor,
 															right: nil, paddingTop: 0, paddingLeft: 0,
 															paddingBottom: 24, paddingRight: 0, width: 100, height: 100)
 		capturePhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		
-		view.addSubview(switchCameraButton)
+		view.add(switchCameraButton)
 		switchCameraButton.anchor(top: nil, left: nil,
 															bottom: view.bottomAnchor, right: view.rightAnchor,
 															paddingTop: 0, paddingLeft: 0, paddingBottom: 48,
 															paddingRight: 16, width: 50, height: 50)
 		
-		let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoom(pinch:)))
 		view.addGestureRecognizer(pinchGesture)
 	}
 	

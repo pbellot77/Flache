@@ -58,7 +58,7 @@ class PreviewPhotoContainerView: UIView {
 				savedLabel.textAlignment = .center
 				savedLabel.frame = CGRect(x: 0, y: 0, width: 150, height: 80)
 				savedLabel.center = self.center
-				self.addSubview(savedLabel)
+				self.add(savedLabel)
 				
 				savedLabel.layer.transform = CATransform3DMakeScale(0, 0, 0)
 				
@@ -80,13 +80,13 @@ class PreviewPhotoContainerView: UIView {
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		
-		addSubview(previewImageView)
+		add(previewImageView)
 		previewImageView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
 		
-		addSubview(cancelButton)
+		add(cancelButton)
 		cancelButton.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 15, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 50, height: 50)
 		
-		addSubview(saveButton)
+		add(saveButton)
 		saveButton.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 24, paddingBottom: 24, paddingRight: 0, width: 50, height: 50)
 	}
 	
