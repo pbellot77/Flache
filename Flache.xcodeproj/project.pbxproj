@@ -12,8 +12,8 @@
 		BA9A7A512065862D00050D46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA9A7A4F2065862D00050D46 /* LaunchScreen.storyboard */; };
 		BA9A7A5C2065862D00050D46 /* FlacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9A7A5B2065862D00050D46 /* FlacheTests.swift */; };
 		BA9A7A672065862E00050D46 /* FlacheUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9A7A662065862E00050D46 /* FlacheUITests.swift */; };
-		BA9A7A752065872500050D46 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9A7A742065872500050D46 /* CameraController.swift */; };
-		BA9A7A78206589AB00050D46 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9A7A77206589AB00050D46 /* Extensions.swift */; };
+		BA9A7A752065872500050D46 /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9A7A742065872500050D46 /* PhotoController.swift */; };
+		BA9A7A78206589AB00050D46 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9A7A77206589AB00050D46 /* UIView.swift */; };
 		BA9A7A7A2065907200050D46 /* PreviewPhotoContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9A7A792065907200050D46 /* PreviewPhotoContainerView.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,8 +46,8 @@
 		BA9A7A622065862E00050D46 /* FlacheUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlacheUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA9A7A662065862E00050D46 /* FlacheUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlacheUITests.swift; sourceTree = "<group>"; };
 		BA9A7A682065862E00050D46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BA9A7A742065872500050D46 /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
-		BA9A7A77206589AB00050D46 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		BA9A7A742065872500050D46 /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
+		BA9A7A77206589AB00050D46 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		BA9A7A792065907200050D46 /* PreviewPhotoContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPhotoContainerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,7 +99,7 @@
 		BA9A7A452065862B00050D46 /* Flache */ = {
 			isa = PBXGroup;
 			children = (
-				BA9A7A76206588F700050D46 /* Camera */,
+				BA9A7A76206588F700050D46 /* Photo */,
 				BA9A7A4D2065862D00050D46 /* Assets.xcassets */,
 				BA9A7A4F2065862D00050D46 /* LaunchScreen.storyboard */,
 				BA9A7A522065862D00050D46 /* Info.plist */,
@@ -127,19 +127,19 @@
 			path = FlacheUITests;
 			sourceTree = "<group>";
 		};
-		BA9A7A76206588F700050D46 /* Camera */ = {
+		BA9A7A76206588F700050D46 /* Photo */ = {
 			isa = PBXGroup;
 			children = (
-				BA9A7A742065872500050D46 /* CameraController.swift */,
+				BA9A7A742065872500050D46 /* PhotoController.swift */,
 				BA9A7A792065907200050D46 /* PreviewPhotoContainerView.swift */,
 			);
-			path = Camera;
+			path = Photo;
 			sourceTree = "<group>";
 		};
 		BA9A7A7B2068309400050D46 /* Utilis */ = {
 			isa = PBXGroup;
 			children = (
-				BA9A7A77206589AB00050D46 /* Extensions.swift */,
+				BA9A7A77206589AB00050D46 /* UIView.swift */,
 			);
 			path = Utilis;
 			sourceTree = "<group>";
@@ -275,8 +275,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA9A7A7A2065907200050D46 /* PreviewPhotoContainerView.swift in Sources */,
-				BA9A7A752065872500050D46 /* CameraController.swift in Sources */,
-				BA9A7A78206589AB00050D46 /* Extensions.swift in Sources */,
+				BA9A7A752065872500050D46 /* PhotoController.swift in Sources */,
+				BA9A7A78206589AB00050D46 /* UIView.swift in Sources */,
 				BA9A7A472065862B00050D46 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

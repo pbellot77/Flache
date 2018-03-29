@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		window = UIWindow(frame: UIScreen.main.bounds)
 		window?.makeKeyAndVisible()
-		let vc = CameraController()
+		let vc = PhotoController()
 		window?.rootViewController = vc
 		
 		return true

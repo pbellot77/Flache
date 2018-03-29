@@ -1,5 +1,5 @@
 //
-//  CameraController.swift
+//  PhotoController.swift
 //  Flache
 //
 //  Created by Patrick Bellot on 3/23/18.
@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
+class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	
 	// MARK: -- Properties
 	let output = AVCapturePhotoOutput()
@@ -97,12 +97,12 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
 	// MARK: -- Functions
 	func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
 		guard let imageData = photo.fileDataRepresentation() else { return }
+		guard let previewImage = UIImage(data: imageData) else { return }
 		
-		let previewImage = UIImage(data: imageData)
 		let containerView = PreviewPhotoContainerView()
 		
 		if captureDevice?.position == .front {
-			let mirroredImage = flipImage(image: previewImage!)
+			let mirroredImage = flipImage(image: previewImage)
 			containerView.previewImageView.image = mirroredImage
 		} else {
 			containerView.previewImageView.image = previewImage
