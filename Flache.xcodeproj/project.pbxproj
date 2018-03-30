@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA15AF0E206E959C007C6487 /* CaptureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA15AF0D206E959C007C6487 /* CaptureController.swift */; };
 		BA9A7A472065862B00050D46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9A7A462065862B00050D46 /* AppDelegate.swift */; };
 		BA9A7A4E2065862D00050D46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA9A7A4D2065862D00050D46 /* Assets.xcassets */; };
 		BA9A7A512065862D00050D46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA9A7A4F2065862D00050D46 /* LaunchScreen.storyboard */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA15AF0D206E959C007C6487 /* CaptureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureController.swift; sourceTree = "<group>"; };
 		BA9A7A432065862B00050D46 /* Flache.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flache.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA9A7A462065862B00050D46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA9A7A4D2065862D00050D46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -76,6 +78,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA15AF0B206E9567007C6487 /* Preview */ = {
+			isa = PBXGroup;
+			children = (
+				BA9A7A792065907200050D46 /* PreviewPhotoContainerView.swift */,
+			);
+			path = Preview;
+			sourceTree = "<group>";
+		};
+		BA15AF0C206E9582007C6487 /* Capture */ = {
+			isa = PBXGroup;
+			children = (
+				BA15AF0D206E959C007C6487 /* CaptureController.swift */,
+			);
+			path = Capture;
+			sourceTree = "<group>";
+		};
 		BA9A7A3A2065862B00050D46 = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +117,8 @@
 		BA9A7A452065862B00050D46 /* Flache */ = {
 			isa = PBXGroup;
 			children = (
+				BA15AF0C206E9582007C6487 /* Capture */,
+				BA15AF0B206E9567007C6487 /* Preview */,
 				BA9A7A76206588F700050D46 /* Photo */,
 				BA9A7A4D2065862D00050D46 /* Assets.xcassets */,
 				BA9A7A4F2065862D00050D46 /* LaunchScreen.storyboard */,
@@ -131,7 +151,6 @@
 			isa = PBXGroup;
 			children = (
 				BA9A7A742065872500050D46 /* PhotoController.swift */,
-				BA9A7A792065907200050D46 /* PreviewPhotoContainerView.swift */,
 			);
 			path = Photo;
 			sourceTree = "<group>";
@@ -278,6 +297,7 @@
 				BA9A7A752065872500050D46 /* PhotoController.swift in Sources */,
 				BA9A7A78206589AB00050D46 /* UIView.swift in Sources */,
 				BA9A7A472065862B00050D46 /* AppDelegate.swift in Sources */,
+				BA15AF0E206E959C007C6487 /* CaptureController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
