@@ -9,20 +9,21 @@
 import UIKit
 import AVFoundation
 
+
+enum CameraPosition {
+	case back, front
+}
+
+enum FlashMode: Int {
+	case off, on, auto
+}
+
+enum CameraOutput {
+	case photo, video
+}
+
 class CaptureController: UIViewController {
-	
-	enum CameraPosition {
-		case back, front
-	}
-	
-	enum FlashMode: Int {
-		case off, on, auto
-	}
-	
-	enum CameraMode {
-		case photo, video
-	}
-	
+
 	var captureDevice: AVCaptureDevice?
 	var frontCamera: AVCaptureDevice?
 	var backCamera: AVCaptureDevice?
