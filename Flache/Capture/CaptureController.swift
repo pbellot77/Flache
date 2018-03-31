@@ -56,12 +56,21 @@ class CaptureController: UIViewController {
 	override func loadView() {
 		super.loadView()
 		
+		setupCaptureDevice()
 		setupHUD()
-		
 	}
 	
-	fileprivate func setupCaptureDevice() -> AVCaptureDevice {
-		
+	fileprivate func setupCaptureDevice() {
+		let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTelephotoCamera, .builtInTrueDepthCamera], mediaType: .video, position: .unspecified)
+		for device in discoverySession.devices {
+			if device.position == .back {
+				backCamera = device
+			}
+			
+			if device.position == .front {
+				frontCamera = device
+			}
+		}
 	}
 	
 	fileprivate func setupHUD() {
@@ -98,9 +107,9 @@ class CaptureController: UIViewController {
 		} catch let err {
 			print("Could not toggle camera:", err)
 		}
-		if captureSession.canAddOutput(output) {
-			captureSession.addOutput(output)
-		}
+//		if captureSession.canAddOutput(output) {
+//			captureSession.addOutput(output)
+//		}
 		captureSession.commitConfiguration()
 	}
 	
