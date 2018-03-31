@@ -37,7 +37,7 @@ class CaptureController: UIViewController {
 	
 	let captureButton: UIButton = {
 		let button = UIButton(type: .system)
-		button.setImage(#imageLiteral(resourceName: "CameraButton"), for: .normal)
+		button.setImage(#imageLiteral(resourceName: "capture_photo"), for: .normal)
 		button.addTarget(self, action: #selector(handleCapture), for: .touchUpInside)
 		return button
 	}()
