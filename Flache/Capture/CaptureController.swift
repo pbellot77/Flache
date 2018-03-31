@@ -57,16 +57,11 @@ class CaptureController: UIViewController {
 		super.loadView()
 		
 		setupHUD()
-		captureDevice = setupCaptureDevice(.back)
+		
 	}
 	
-	fileprivate func setupCaptureDevice(_ cameraPosition: CameraPosition) -> AVCaptureDevice {
-		switch cameraPosition {
-		case .back:
-			backCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
-		case .front:
-			frontCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
-		}
+	fileprivate func setupCaptureDevice() -> AVCaptureDevice {
+		
 	}
 	
 	fileprivate func setupHUD() {
