@@ -10,14 +10,14 @@ import UIKit
 import AVFoundation
 
 class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
-	
+
 	// MARK: -- Properties
-	let output = AVCapturePhotoOutput()
+	let photoOutput = AVCapturePhotoOutput()
 	
 	var backCamera: AVCaptureDevice?
 	var frontCamera: AVCaptureDevice?
 	var captureDevice: AVCaptureDevice?
-	
+
 	var toggleCamera = false
 	var zoomFactor: CGFloat = 1.0
 	
@@ -47,15 +47,21 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	override func loadView() {
 		super.loadView()
 		
-		setupInputs()
+		setupCaptureDevice()
 		setupCaptureSession()
 		setupHUD()
 	}
 
-	// MARK: -- Private Functions
-	fileprivate func setupInputs() {
-		backCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
-		frontCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
+	 // MARK: -- Private Functions
+	fileprivate func setupCaptureDevice() {
+		let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTelephotoCamera, .builtInTrueDepthCamera], mediaType: .video, position: .unspecified)
+		discoverySession.devices.forEach { (device) in
+			if device.position == .back {
+				backCamera = device
+			} else if device.position == .front {
+				frontCamera = device
+			}
+		}
 		captureDevice = backCamera
 	}
 	
@@ -65,13 +71,13 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 															right: nil, paddingTop: 0, paddingLeft: 0,
 															paddingBottom: 24, paddingRight: 0, width: 100, height: 100)
 		capturePhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-		
+
 		view.add(switchCameraButton)
 		switchCameraButton.anchor(top: nil, left: nil,
 															bottom: view.bottomAnchor, right: view.rightAnchor,
 															paddingTop: 0, paddingLeft: 0, paddingBottom: 48,
 															paddingRight: 16, width: 50, height: 50)
-		
+
 		let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoom(pinch:)))
 		view.addGestureRecognizer(pinchGesture)
 	}
@@ -85,8 +91,8 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		} catch let err {
 			print("Could not setup camera input:", err)
 		}
-		if captureSession.canAddOutput(output){
-			captureSession.addOutput(output)
+		if captureSession.canAddOutput(photoOutput){
+			captureSession.addOutput(photoOutput)
 		}
 		let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
 		previewLayer.frame = view.frame
@@ -120,19 +126,38 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		return flippedImage
 	}
 	
+	func flip() {
+		let blurView = UIVisualEffectView(frame: view.bounds)
+		blurView.effect = UIBlurEffect(style: .light)
+		view.add(blurView)
+		
+		if captureDevice?.position == .back {
+			UIView.transition(with: view, duration: 0.8, options: .transitionFlipFromLeft, animations: nil) { (finished) in
+				blurView.removeFromSuperview()
+			}
+		}
+		if captureDevice?.position == .front {
+			UIView.transition(with: view, duration: 0.8, options: .transitionFlipFromRight, animations: nil) { (finished) in
+				blurView.removeFromSuperview()
+			}
+		}
+	}
+	
 	// MARK: -- Selector methods
 	@objc func handleCapturePhoto() {
 		let settings = AVCapturePhotoSettings()
 		guard let previewFormatType = settings.availablePreviewPhotoPixelFormatTypes.first else { return }
 		settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewFormatType]
-		output.capturePhoto(with: settings, delegate: self)
+		photoOutput.capturePhoto(with: settings, delegate: self)
 	}
 	
 	@objc func handleCameraToggle() {
-		captureSession.beginConfiguration()
 		captureDevice = toggleCamera ? backCamera : frontCamera
 		toggleCamera = !toggleCamera
 		captureSession.inputs.forEach { captureSession.removeInput($0) }
+		flip()
+		captureSession.beginConfiguration()
+		
 		do {
 			let newInput = try AVCaptureDeviceInput(device: captureDevice!)
 			if captureSession.canAddInput(newInput) {
@@ -141,8 +166,8 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		} catch let err {
 			print("Could not toggle camera:", err)
 		}
-		if captureSession.canAddOutput(output) {
-			captureSession.addOutput(output)
+		if captureSession.canAddOutput(photoOutput) {
+			captureSession.addOutput(photoOutput)
 		}
 		captureSession.commitConfiguration()
 	}
