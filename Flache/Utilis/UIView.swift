@@ -1,5 +1,5 @@
 //
-//  Extensions.swift
+//  UIView.swift
 //  InstagramFirebase
 //
 //  Created by Patrick Bellot on 2/15/18.
@@ -31,5 +31,9 @@ extension UIView {
 		if height != 0 {
 			heightAnchor.constraint(equalToConstant: height).isActive = true
 		}
+	}
+	
+	func add(_ subviews: UIView...) {
+		subviews.forEach(addSubview)
 	}
 }
