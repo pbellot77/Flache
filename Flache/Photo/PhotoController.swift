@@ -30,6 +30,14 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		return capture
 	}()
 	
+	let previewImage: UIImageView = {
+		let iv = UIImageView()
+		iv.backgroundColor = .white
+		iv.layer.cornerRadius = 10
+		iv.clipsToBounds = true
+		return iv
+	}()
+	
 	let capturePhotoButton: UIButton = {
 		let button = UIButton(type: .system)
 		button.setImage(#imageLiteral(resourceName: "CameraButton"), for: .normal)
@@ -75,8 +83,11 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		view.add(switchCameraButton)
 		switchCameraButton.anchor(top: nil, left: nil,
 															bottom: view.bottomAnchor, right: view.rightAnchor,
-															paddingTop: 0, paddingLeft: 0, paddingBottom: 48,
+															paddingTop: 0, paddingLeft: 0, paddingBottom: 46,
 															paddingRight: 16, width: 50, height: 50)
+		
+		view.add(previewImage)
+		previewImage.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 16, paddingBottom: 48, paddingRight: 0, width: 40, height: 40)
 
 		let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoom(pinch:)))
 		view.addGestureRecognizer(pinchGesture)
@@ -126,23 +137,6 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		return flippedImage
 	}
 	
-	func flip() {
-		let blurView = UIVisualEffectView(frame: view.bounds)
-		blurView.effect = UIBlurEffect(style: .light)
-		view.add(blurView)
-		
-		if captureDevice?.position == .back {
-			UIView.transition(with: view, duration: 0.8, options: .transitionFlipFromLeft, animations: nil) { (finished) in
-				blurView.removeFromSuperview()
-			}
-		}
-		if captureDevice?.position == .front {
-			UIView.transition(with: view, duration: 0.8, options: .transitionFlipFromRight, animations: nil) { (finished) in
-				blurView.removeFromSuperview()
-			}
-		}
-	}
-	
 	// MARK: -- Selector methods
 	@objc func handleCapturePhoto() {
 		let settings = AVCapturePhotoSettings()
@@ -152,16 +146,14 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	}
 	
 	@objc func handleCameraToggle() {
+		captureSession.beginConfiguration()
 		captureDevice = toggleCamera ? backCamera : frontCamera
 		toggleCamera = !toggleCamera
 		captureSession.inputs.forEach { captureSession.removeInput($0) }
-		flip()
-		captureSession.beginConfiguration()
-		
 		do {
 			let newInput = try AVCaptureDeviceInput(device: captureDevice!)
 			if captureSession.canAddInput(newInput) {
-				captureSession.addInput(newInput)
+					self.captureSession.addInput(newInput)
 			}
 		} catch let err {
 			print("Could not toggle camera:", err)
