@@ -12,7 +12,7 @@ import AVFoundation
 class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 
 	// MARK: -- Properties
-	let output = AVCapturePhotoOutput()
+	let photoOutput = AVCapturePhotoOutput()
 	let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoom(pinch:)))
 	
 	var backCamera: AVCaptureDevice?
