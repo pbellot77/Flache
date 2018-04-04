@@ -1,5 +1,5 @@
 //
-//  Extensions.swift
+//  UIView.swift
 //  InstagramFirebase
 //
 //  Created by Patrick Bellot on 2/15/18.
