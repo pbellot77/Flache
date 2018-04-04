@@ -9,6 +9,10 @@
 import UIKit
 import AVFoundation
 
+enum CurrentFlashMode {
+	case off, on, auto
+}
+
 class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 
 	// MARK: -- Properties
@@ -18,6 +22,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	var frontCamera: AVCaptureDevice?
 	var captureDevice: AVCaptureDevice?
 
+	var toggleFlash = false
 	var toggleCamera = false
 	var zoomFactor: CGFloat = 1.0
 	
@@ -33,6 +38,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	let flashButton: UIButton = {
 		let button = UIButton(type: .system)
 		button.setImage(#imageLiteral(resourceName: "FlashOff"), for: .normal)
+		button.addTarget(self, action: #selector(handleFlashToggle), for: .touchUpInside)
 		return button
 	}()
 	
@@ -153,6 +159,16 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	}
 	
 	// MARK: -- Selector methods
+	@objc func handleFlashToggle() {
+		guard let device = AVCaptureDevice.default(for: .video) else { return }
+		let settings = AVCapturePhotoSettings()
+		if device.hasFlash == true {
+			
+		}
+	}
+	
+
+	
 	@objc func handleCapturePhoto() {
 		let settings = AVCapturePhotoSettings()
 		guard let previewFormatType = settings.availablePreviewPhotoPixelFormatTypes.first else { return }
