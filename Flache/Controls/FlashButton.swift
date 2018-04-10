@@ -9,48 +9,40 @@
 import UIKit
 import AVFoundation
 
-enum FlashMode: Int {
-	case off = 0, on, auto
-}
+
 
 class FlashButton: UIButton {
 	
-	var currentFlashMode: FlashMode = .off
+	var tapCount = 0
 	
-	lazy var button: UIButton = {
-		let button = UIButton(type: .system)
-		button.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
-		return button
-	}()
-
 	override init(frame: CGRect) {
 		super.init(frame: frame)
-	
-		setFlashMode(currentFlashMode)
+		
+		setupFlash(tapCount)
 	}
 	
-	@objc func handleTap() {
-		if currentFlashMode == .off {
-			currentFlashMode = .on
-		} else if currentFlashMode == .on {
-			currentFlashMode = .auto
-		} else {
-			currentFlashMode = .off
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		tapCount += 1
+		if tapCount > 2 {
+			tapCount = 0
 		}
+		print(tapCount)
+		setupFlash(tapCount)
 	}
 	
-	fileprivate func setFlashMode(_ flashMode: FlashMode) {
+	fileprivate func setupFlash(_ count: Int) {
 		let settings = AVCapturePhotoSettings()
-		switch flashMode {
-		case .off:
+		if tapCount == 0 {
 			settings.flashMode = .off
-			self.button.setImage(#imageLiteral(resourceName: "FlashOff"), for: .normal)
-		case .on:
+			self.setImage(#imageLiteral(resourceName: "FlashOff"), for: .normal)
+		}
+		if tapCount == 1 {
 			settings.flashMode = .on
-			self.button.setImage(#imageLiteral(resourceName: "FlashOn"), for: .normal)
-		case .auto:
+			self.setImage(#imageLiteral(resourceName: "FlashOn"), for: .normal)
+		}
+		if tapCount == 2 {
 			settings.flashMode = .auto
-			self.button.setImage(#imageLiteral(resourceName: "FlashAuto"), for: .normal)
+			self.setImage(#imageLiteral(resourceName: "FlashAuto"), for: .normal)
 		}
 	}
 	
