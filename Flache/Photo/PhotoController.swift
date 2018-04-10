@@ -31,9 +31,8 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		return capture
 	}()
 	
-	let flashButton: UIButton = {
-		let button = UIButton(type: .system)
-		button.setImage(#imageLiteral(resourceName: "FlashOff"), for: .normal)
+	let flashButton: FlashButton = {
+		let button = FlashButton(type: .system)
 		return button
 	}()
 	
