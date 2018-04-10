@@ -13,7 +13,7 @@ import AVFoundation
 
 class FlashButton: UIButton {
     
-	var tapCount = 0
+    var tapCount = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -29,7 +29,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	lazy var captureSession: AVCaptureSession = {
 		let capture = AVCaptureSession()
 		return capture
-	}()
+    }()
 	
     let flashButton: FlashButton = {
 		let button = FlashButton()
@@ -69,7 +69,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
      // MARK: -- Private Functions
     fileprivate func setupCaptureDevice() {
         let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTelephotoCamera, .builtInTrueDepthCamera],
-																												   mediaType: .video, position: .unspecified)
+                                                                                                                   mediaType: .video, position: .unspecified)
         discoverySession.devices.forEach { (device) in
             if device.position == .back {
                 backCamera = device
@@ -83,18 +83,18 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
     fileprivate func setupHUD() {
         view.add(capturePhotoButton)
         capturePhotoButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: nil,
-															 paddingTop: 0, paddingLeft: 0, paddingBottom: 24, paddingRight: 0, width: 100, height: 100)
+                                                             paddingTop: 0, paddingLeft: 0, paddingBottom: 24, paddingRight: 0, width: 100, height: 100)
         capturePhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         view.add(switchCameraButton)
         switchCameraButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: view.rightAnchor,
-															 paddingTop: 0, paddingLeft: 0, paddingBottom: 48, paddingRight: 16, width: 50, height: 50)
-			
-				view.add(flashButton)
-				flashButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: 16, width: 50, height: 50)
-			
-				view.add(previewImage)
-				previewImage.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 16, paddingBottom: 50, paddingRight: 0, width: 48, height: 48)
+                                                             paddingTop: 0, paddingLeft: 0, paddingBottom: 48, paddingRight: 16, width: 50, height: 50)
+            
+                view.add(flashButton)
+                flashButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: 16, width: 50, height: 50)
+            
+                view.add(previewImage)
+                previewImage.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 16, paddingBottom: 50, paddingRight: 0, width: 48, height: 48)
         
         view.addGestureRecognizer(pinchGesture)
     }
