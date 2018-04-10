@@ -15,6 +15,7 @@
 		BA9A7A752065872500050D46 /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9A7A742065872500050D46 /* PhotoController.swift */; };
 		BA9A7A78206589AB00050D46 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9A7A77206589AB00050D46 /* UIView.swift */; };
 		BA9A7A7A2065907200050D46 /* PreviewPhotoContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9A7A792065907200050D46 /* PreviewPhotoContainerView.swift */; };
+		BAB19CCF207D13F200A0A44B /* FlashButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB19CCE207D13F200A0A44B /* FlashButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		BA9A7A742065872500050D46 /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
 		BA9A7A77206589AB00050D46 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		BA9A7A792065907200050D46 /* PreviewPhotoContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPhotoContainerView.swift; sourceTree = "<group>"; };
+		BAB19CCE207D13F200A0A44B /* FlashButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 		BA9A7A452065862B00050D46 /* Flache */ = {
 			isa = PBXGroup;
 			children = (
+				BAB19CCD207D13CA00A0A44B /* Controls */,
 				BA9A7A76206588F700050D46 /* Photo */,
 				BA15AF0B206E9567007C6487 /* Preview */,
 				BA9A7A4D2065862D00050D46 /* Assets.xcassets */,
@@ -150,6 +153,14 @@
 				BA9A7A77206589AB00050D46 /* UIView.swift */,
 			);
 			path = Utilis;
+			sourceTree = "<group>";
+		};
+		BAB19CCD207D13CA00A0A44B /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				BAB19CCE207D13F200A0A44B /* FlashButton.swift */,
+			);
+			path = Controls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA9A7A7A2065907200050D46 /* PreviewPhotoContainerView.swift in Sources */,
+				BAB19CCF207D13F200A0A44B /* FlashButton.swift in Sources */,
 				BA9A7A752065872500050D46 /* PhotoController.swift in Sources */,
 				BA9A7A78206589AB00050D46 /* UIView.swift in Sources */,
 				BA9A7A472065862B00050D46 /* AppDelegate.swift in Sources */,
