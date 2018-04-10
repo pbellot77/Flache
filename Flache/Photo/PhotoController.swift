@@ -19,20 +19,20 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
     var frontCamera: AVCaptureDevice?
     var captureDevice: AVCaptureDevice?
 
-	var toggleCamera = false
-	var zoomFactor: CGFloat = 1.0
-	
-	override var prefersStatusBarHidden: Bool {
-		return true
-	}
-	
-	lazy var captureSession: AVCaptureSession = {
-		let capture = AVCaptureSession()
-		return capture
+    var toggleCamera = false
+    var zoomFactor: CGFloat = 1.0
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    lazy var captureSession: AVCaptureSession = {
+        let capture = AVCaptureSession()
+        return capture
     }()
-	
+    
     let flashButton: FlashButton = {
-		let button = FlashButton()
+        let button = FlashButton()
         return button
     }()
     
