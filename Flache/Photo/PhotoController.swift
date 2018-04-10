@@ -9,10 +9,6 @@
 import UIKit
 import AVFoundation
 
-enum CurrentFlashMode {
-    case off, on, auto
-}
-
 class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 
     // MARK: -- Properties
@@ -23,23 +19,22 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
     var frontCamera: AVCaptureDevice?
     var captureDevice: AVCaptureDevice?
 
-    var toggleFlash = false
-    var toggleCamera = false
-    var zoomFactor: CGFloat = 1.0
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
-    lazy var captureSession: AVCaptureSession = {
-        let capture = AVCaptureSession()
-        return capture
-    }()
-    
-	let flashButton: FlashButton = {
-		let button = FlashButton()
-		return button
+	var toggleCamera = false
+	var zoomFactor: CGFloat = 1.0
+	
+	override var prefersStatusBarHidden: Bool {
+		return true
+	}
+	
+	lazy var captureSession: AVCaptureSession = {
+		let capture = AVCaptureSession()
+		return capture
 	}()
+	
+    let flashButton: FlashButton = {
+		let button = FlashButton()
+        return button
+    }()
     
     let previewImage: UIImageView = {
         let iv = UIImageView()
