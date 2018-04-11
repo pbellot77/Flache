@@ -10,14 +10,14 @@ import UIKit
 import AVFoundation
 
 class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
-
+	
 	// MARK: -- Properties
 	let photoOutput = AVCapturePhotoOutput()
 	
 	var backCamera: AVCaptureDevice?
 	var frontCamera: AVCaptureDevice?
 	var captureDevice: AVCaptureDevice?
-
+	
 	var toggleCamera = false
 	var zoomFactor: CGFloat = 1.0
 	
@@ -30,9 +30,8 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		return capture
 	}()
 	
-	let flashButton: UIButton = {
-		let button = UIButton(type: .system)
-		button.setImage(#imageLiteral(resourceName: "FlashOff"), for: .normal)
+	let flashButton: FlashButton = {
+		let button = FlashButton(type: .system)
 		return button
 	}()
 	
@@ -65,12 +64,11 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		setupCaptureSession()
 		setupHUD()
 	}
-
-	 // MARK: -- Private Functions
+	
+	// MARK: -- Private Functions
 	fileprivate func setupCaptureDevice() {
-		let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera,
-																																		 .builtInTelephotoCamera, .builtInTrueDepthCamera],
-																														         mediaType: .video, position: .unspecified)
+		let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTelephotoCamera, .builtInTrueDepthCamera],
+																												mediaType: .video, position: .unspecified)
 		discoverySession.devices.forEach { (device) in
 			if device.position == .back {
 				backCamera = device
@@ -82,35 +80,31 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	}
 	
 	fileprivate func setupHUD() {
-		view.add(flashButton)
-		flashButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor,
-											 paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0,
-											 width: 80, height: 80)
-		
 		view.add(capturePhotoButton)
 		capturePhotoButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: nil,
-															paddingTop: 0, paddingLeft: 0, paddingBottom: 10, paddingRight: 0,
-															width: 100, height: 100)
+															paddingTop: 0, paddingLeft: 0, paddingBottom: 24, paddingRight: 0, width: 100, height: 100)
 		capturePhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-		
-		view.add(previewImage)
-		previewImage.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil,
-											paddingTop: 0, paddingLeft: 20, paddingBottom: 40, paddingRight: 0,
-											width: 44, height: 44)
-		
 		
 		view.add(switchCameraButton)
 		switchCameraButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: view.rightAnchor,
-															paddingTop: 0, paddingLeft: 0, paddingBottom: 35, paddingRight: 20,
-															width: 50, height: 50)
-
+															paddingTop: 0, paddingLeft: 0, paddingBottom: 48, paddingRight: 16, width: 50, height: 50)
+		
+		view.add(flashButton)
+		flashButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor,
+											 paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: 16, width: 50, height: 50)
+		
+		view.add(previewImage)
+		previewImage.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil,
+												paddingTop: 0, paddingLeft: 16, paddingBottom: 50, paddingRight: 0, width: 48, height: 48)
+		
 		let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoom(pinch:)))
 		view.addGestureRecognizer(pinchGesture)
 	}
 	
 	fileprivate func setupCaptureSession() {
+		guard let device = captureDevice else { return }
 		do {
-			let input = try AVCaptureDeviceInput(device: captureDevice!)
+			let input = try AVCaptureDeviceInput(device: device)
 			if captureSession.canAddInput(input) {
 				captureSession.addInput(input)
 			}
@@ -168,7 +162,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		do {
 			let newInput = try AVCaptureDeviceInput(device: captureDevice!)
 			if captureSession.canAddInput(newInput) {
-					self.captureSession.addInput(newInput)
+				self.captureSession.addInput(newInput)
 			}
 		} catch let err {
 			print("Could not toggle camera:", err)
