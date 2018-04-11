@@ -31,7 +31,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	}()
 	
 	let flashButton: FlashButton = {
-		let button = FlashButton()
+		let button = FlashButton(type: .system)
 		return button
 	}()
 	
