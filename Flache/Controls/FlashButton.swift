@@ -9,8 +9,6 @@
 import UIKit
 import AVFoundation
 
-
-
 class FlashButton: UIButton {
     
     var tapCount = 0
