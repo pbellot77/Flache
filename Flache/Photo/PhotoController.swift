@@ -20,6 +20,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	
 	var toggleCamera = false
 	var zoomFactor: CGFloat = 1.0
+	var flashMode: AVCaptureDevice.FlashMode?
 	
 	override var prefersStatusBarHidden: Bool {
 		return true
@@ -151,6 +152,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		let settings = AVCapturePhotoSettings()
 		guard let previewFormatType = settings.availablePreviewPhotoPixelFormatTypes.first else { return }
 		settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewFormatType]
+		settings.flashMode = flashButton.currentFlashMode
 		photoOutput.capturePhoto(with: settings, delegate: self)
 	}
 	
