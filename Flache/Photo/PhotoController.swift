@@ -36,8 +36,9 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		return button
 	}()
 	
-	let previewImage: UIImageView = {
-		let iv = UIImageView()
+	let thumbnailImage: ThumbnailImageView = {
+		let iv = ThumbnailImageView()
+		iv.getLastImage()
 		iv.backgroundColor = .white
 		iv.layer.cornerRadius = 10
 		iv.clipsToBounds = true
@@ -94,9 +95,9 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		flashButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor,
 											 paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: 16, width: 50, height: 50)
 		
-		view.add(previewImage)
-		previewImage.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil,
-												paddingTop: 0, paddingLeft: 16, paddingBottom: 50, paddingRight: 0, width: 48, height: 48)
+		view.add(thumbnailImage)
+		thumbnailImage.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil,
+												paddingTop: 0, paddingLeft: 16, paddingBottom: 50, paddingRight: 0, width: 50, height: 50)
 		
 		let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoom(pinch:)))
 		view.addGestureRecognizer(pinchGesture)
