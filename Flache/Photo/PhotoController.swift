@@ -42,6 +42,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		iv.backgroundColor = .white
 		iv.layer.cornerRadius = 10
 		iv.clipsToBounds = true
+		iv.isUserInteractionEnabled = true
 		return iv
 	}()
 	
@@ -101,6 +102,9 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		
 		let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoom(pinch:)))
 		view.addGestureRecognizer(pinchGesture)
+		
+		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(tap:)))
+		thumbnailImage.addGestureRecognizer(tapGesture)
 	}
 	
 	fileprivate func setupCaptureSession() {
@@ -153,7 +157,12 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		let settings = AVCapturePhotoSettings()
 		guard let previewFormatType = settings.availablePreviewPhotoPixelFormatTypes.first else { return }
 		settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewFormatType]
-		settings.flashMode = flashButton.currentFlashMode
+		if (captureDevice?.hasFlash)! {
+			settings.flashMode = flashButton.currentFlashMode
+			print("Flash detected on this device")
+		} else {
+			print("Flash not available on this device")
+		}
 		photoOutput.capturePhoto(with: settings, delegate: self)
 	}
 	
@@ -174,6 +183,12 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 			captureSession.addOutput(photoOutput)
 		}
 		captureSession.commitConfiguration()
+	}
+	
+	@objc func handleTap(tap: UITapGestureRecognizer) {
+		let layout = UICollectionViewFlowLayout()
+		let photoCollectionView = PhotoCollectionView(collectionViewLayout: layout)
+		self.present(photoCollectionView, animated: true, completion: nil)
 	}
 	
 	@objc func zoom(pinch: UIPinchGestureRecognizer){
