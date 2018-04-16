@@ -23,12 +23,25 @@ class PhotoCollectionView: UICollectionViewController, UICollectionViewDelegateF
 	}
 	
 	func setupNavBar() {
-		// TODO: add back button
 		navigationController?.navigationBar.prefersLargeTitles = true
 		navigationItem.title = "Last 24 Photos"
 		navigationController?.navigationBar.barTintColor = .white
 		let attributes = [NSAttributedStringKey.foregroundColor: UIColor.mainBlue()]
 		navigationController?.navigationBar.largeTitleTextAttributes = attributes
+		addBackbutton()
+	}
+	
+	func addBackbutton() {
+		let backButton = UIButton(type: .custom)
+		backButton.tintColor = UIColor.mainBlue()
+		backButton.setTitle("Back", for: .normal)
+		backButton.setTitleColor(UIColor.mainBlue(), for: .normal)
+		backButton.addTarget(self, action: #selector(handleDismiss), for: .touchUpInside)
+		self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+	}
+	
+	@objc func handleDismiss() {
+		self.dismiss(animated: true, completion: nil)
 	}
 	
 	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
