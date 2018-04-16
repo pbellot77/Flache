@@ -10,13 +10,14 @@ import UIKit
 import AVFoundation
 
 class FlashButton: UIButton {
-	
+
 	var tapCount = 0
+	var currentFlashMode: AVCaptureDevice.FlashMode = .off
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		
-		setupFlash(tapCount)
+		setupFlashIcon(tapCount)
 	}
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -24,21 +25,31 @@ class FlashButton: UIButton {
 		if tapCount > 2 {
 			tapCount = 0
 		}
-		setupFlash(tapCount)
+		setupFlashIcon(tapCount)
+		updateFlash(tapCount: tapCount)
 	}
 	
-	fileprivate func setupFlash(_ count: Int) {
-		let flashSettings = AVCapturePhotoSettings()
+	func updateFlash(tapCount: Int){
 		if tapCount == 0 {
-			flashSettings.flashMode = .off
+			currentFlashMode = .off
+			print("The flashMode is:" ,currentFlashMode)
+		} else if tapCount == 1 {
+			currentFlashMode = .on
+			print("The flashMode is:" ,currentFlashMode)
+		} else if tapCount == 2 {
+			currentFlashMode = .auto
+			print("The flashMode is:" ,currentFlashMode)
+		}
+	}
+	
+	fileprivate func setupFlashIcon(_ count: Int){
+		if tapCount == 0 {
 			self.setImage(#imageLiteral(resourceName: "FlashOff"), for: .normal)
 		}
 		if tapCount == 1 {
-			flashSettings.flashMode = .on
 			self.setImage(#imageLiteral(resourceName: "FlashOn"), for: .normal)
 		}
 		if tapCount == 2 {
-			flashSettings.flashMode = .auto
 			self.setImage(#imageLiteral(resourceName: "FlashAuto"), for: .normal)
 		}
 	}
