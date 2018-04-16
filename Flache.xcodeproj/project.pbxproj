@@ -16,6 +16,9 @@
 		BA9A7A78206589AB00050D46 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9A7A77206589AB00050D46 /* UIView.swift */; };
 		BA9A7A7A2065907200050D46 /* PreviewPhotoContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9A7A792065907200050D46 /* PreviewPhotoContainerView.swift */; };
 		BAB19CCF207D13F200A0A44B /* FlashButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB19CCE207D13F200A0A44B /* FlashButton.swift */; };
+		BAB19CD32083D43C00A0A44B /* ThumbnailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB19CD22083D43C00A0A44B /* ThumbnailImageView.swift */; };
+		BAB19CD620850ECB00A0A44B /* PhotoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB19CD520850ECB00A0A44B /* PhotoCollectionView.swift */; };
+		BAB19CD8208528A100A0A44B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB19CD7208528A100A0A44B /* UIColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		BA9A7A77206589AB00050D46 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		BA9A7A792065907200050D46 /* PreviewPhotoContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPhotoContainerView.swift; sourceTree = "<group>"; };
 		BAB19CCE207D13F200A0A44B /* FlashButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashButton.swift; sourceTree = "<group>"; };
+		BAB19CD22083D43C00A0A44B /* ThumbnailImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailImageView.swift; sourceTree = "<group>"; };
+		BAB19CD520850ECB00A0A44B /* PhotoCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionView.swift; sourceTree = "<group>"; };
+		BAB19CD7208528A100A0A44B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +115,7 @@
 		BA9A7A452065862B00050D46 /* Flache */ = {
 			isa = PBXGroup;
 			children = (
+				BAB19CD420850E9A00A0A44B /* PhotoCollection */,
 				BAB19CCD207D13CA00A0A44B /* Controls */,
 				BA9A7A76206588F700050D46 /* Photo */,
 				BA15AF0B206E9567007C6487 /* Preview */,
@@ -151,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				BA9A7A77206589AB00050D46 /* UIView.swift */,
+				BAB19CD7208528A100A0A44B /* UIColor.swift */,
 			);
 			path = Utilis;
 			sourceTree = "<group>";
@@ -159,8 +167,17 @@
 			isa = PBXGroup;
 			children = (
 				BAB19CCE207D13F200A0A44B /* FlashButton.swift */,
+				BAB19CD22083D43C00A0A44B /* ThumbnailImageView.swift */,
 			);
 			path = Controls;
+			sourceTree = "<group>";
+		};
+		BAB19CD420850E9A00A0A44B /* PhotoCollection */ = {
+			isa = PBXGroup;
+			children = (
+				BAB19CD520850ECB00A0A44B /* PhotoCollectionView.swift */,
+			);
+			path = PhotoCollection;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,9 +310,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAB19CD32083D43C00A0A44B /* ThumbnailImageView.swift in Sources */,
 				BA9A7A7A2065907200050D46 /* PreviewPhotoContainerView.swift in Sources */,
 				BAB19CCF207D13F200A0A44B /* FlashButton.swift in Sources */,
+				BAB19CD620850ECB00A0A44B /* PhotoCollectionView.swift in Sources */,
 				BA9A7A752065872500050D46 /* PhotoController.swift in Sources */,
+				BAB19CD8208528A100A0A44B /* UIColor.swift in Sources */,
 				BA9A7A78206589AB00050D46 /* UIView.swift in Sources */,
 				BA9A7A472065862B00050D46 /* AppDelegate.swift in Sources */,
 			);

@@ -36,11 +36,13 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		return button
 	}()
 	
-	let previewImage: UIImageView = {
-		let iv = UIImageView()
+	let thumbnailImage: ThumbnailImageView = {
+		let iv = ThumbnailImageView()
+		iv.getLastImage()
 		iv.backgroundColor = .white
 		iv.layer.cornerRadius = 10
 		iv.clipsToBounds = true
+		iv.isUserInteractionEnabled = true
 		return iv
 	}()
 	
@@ -69,7 +71,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	// MARK: -- Private Functions
 	fileprivate func setupCaptureDevice() {
 		let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTelephotoCamera, .builtInTrueDepthCamera],
-																												mediaType: .video, position: .unspecified)
+																														mediaType: .video, position: .unspecified)
 		discoverySession.devices.forEach { (device) in
 			if device.position == .back {
 				backCamera = device
@@ -94,12 +96,15 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		flashButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor,
 											 paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: 16, width: 50, height: 50)
 		
-		view.add(previewImage)
-		previewImage.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil,
-												paddingTop: 0, paddingLeft: 16, paddingBottom: 50, paddingRight: 0, width: 48, height: 48)
+		view.add(thumbnailImage)
+		thumbnailImage.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil,
+													paddingTop: 0, paddingLeft: 16, paddingBottom: 48, paddingRight: 0, width: 50, height: 50)
 		
 		let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoom(pinch:)))
 		view.addGestureRecognizer(pinchGesture)
+		
+		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(tap:)))
+		thumbnailImage.addGestureRecognizer(tapGesture)
 	}
 	
 	fileprivate func setupCaptureSession() {
@@ -152,7 +157,12 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		let settings = AVCapturePhotoSettings()
 		guard let previewFormatType = settings.availablePreviewPhotoPixelFormatTypes.first else { return }
 		settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewFormatType]
-		settings.flashMode = flashButton.currentFlashMode
+		if (captureDevice?.hasFlash)! {
+			settings.flashMode = flashButton.currentFlashMode
+			print("Flash detected on this device")
+		} else {
+			print("Flash not available on this device")
+		}
 		photoOutput.capturePhoto(with: settings, delegate: self)
 	}
 	
@@ -173,6 +183,13 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 			captureSession.addOutput(photoOutput)
 		}
 		captureSession.commitConfiguration()
+	}
+	
+	@objc func handleTap(tap: UITapGestureRecognizer) {
+		let layout = UICollectionViewFlowLayout()
+		let photoCollectionView = PhotoCollectionView(collectionViewLayout: layout)
+		let photoCollectionNavController = UINavigationController(rootViewController: photoCollectionView)
+		self.present(photoCollectionNavController, animated: true, completion: nil)
 	}
 	
 	@objc func zoom(pinch: UIPinchGestureRecognizer){
