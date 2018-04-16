@@ -188,7 +188,8 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	@objc func handleTap(tap: UITapGestureRecognizer) {
 		let layout = UICollectionViewFlowLayout()
 		let photoCollectionView = PhotoCollectionView(collectionViewLayout: layout)
-		self.present(photoCollectionView, animated: true, completion: nil)
+		let photoCollectionNavController = UINavigationController(rootViewController: photoCollectionView)
+		self.present(photoCollectionNavController, animated: true, completion: nil)
 	}
 	
 	@objc func zoom(pinch: UIPinchGestureRecognizer){
