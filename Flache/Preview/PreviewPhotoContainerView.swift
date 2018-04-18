@@ -19,14 +19,14 @@ class PreviewPhotoContainerView: UIView {
 	
 	let cancelButton: UIButton = {
 		let button = UIButton(type: .system)
-		button.setImage(#imageLiteral(resourceName: "cancel_shadow"), for: .normal)
+		button.setImage(#imageLiteral(resourceName: "Cancel"), for: .normal)
 		button.addTarget(self, action: #selector(handleCancel), for: .touchUpInside)
 		return button
 	}()
 	
 	let saveButton: UIButton = {
 		let button = UIButton(type: .system)
-		button.setImage(#imageLiteral(resourceName: "save_shadow"), for: .normal)
+		button.setImage(#imageLiteral(resourceName: "Save"), for: .normal)
 		button.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
 		return button
 	}()
@@ -67,7 +67,7 @@ class PreviewPhotoContainerView: UIView {
 				}, completion: { (completed) in
 					
 					UIView.animate(withDuration: 0.5, delay: 0.70, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
-						savedLabel.layer.transform = CATransform3DMakeScale(0.01, 0.01, 0.01)
+						savedLabel.layer.transform = CATransform3DMakeScale(0.02, 0.02, 0.02)
 					}, completion: { (_) in
 						savedLabel.removeFromSuperview()
 						self.removeFromSuperview()
