@@ -44,8 +44,8 @@ class PreviewPhotoContainerView: UIView {
 	}
 	
 	@objc func handleShare() {
-		let image = previewImageView.image
-		let imageToShare = [image!]
+		guard let image = previewImageView.image else { return print("No image found") }
+		let imageToShare = [image]
 		let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
 		activityViewController.popoverPresentationController?.sourceView = PreviewPhotoContainerView()
 		
