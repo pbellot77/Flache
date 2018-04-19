@@ -19,6 +19,7 @@
 		BAB19CD32083D43C00A0A44B /* ThumbnailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB19CD22083D43C00A0A44B /* ThumbnailImageView.swift */; };
 		BAB19CD620850ECB00A0A44B /* PhotoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB19CD520850ECB00A0A44B /* PhotoCollectionView.swift */; };
 		BAB19CD8208528A100A0A44B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB19CD7208528A100A0A44B /* UIColor.swift */; };
+		BAB19CDA208640D900A0A44B /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB19CD9208640D900A0A44B /* PhotoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		BAB19CD22083D43C00A0A44B /* ThumbnailImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailImageView.swift; sourceTree = "<group>"; };
 		BAB19CD520850ECB00A0A44B /* PhotoCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionView.swift; sourceTree = "<group>"; };
 		BAB19CD7208528A100A0A44B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		BAB19CD9208640D900A0A44B /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				BAB19CD520850ECB00A0A44B /* PhotoCollectionView.swift */,
+				BAB19CD9208640D900A0A44B /* PhotoCell.swift */,
 			);
 			path = PhotoCollection;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAB19CD32083D43C00A0A44B /* ThumbnailImageView.swift in Sources */,
+				BAB19CDA208640D900A0A44B /* PhotoCell.swift in Sources */,
 				BA9A7A7A2065907200050D46 /* PreviewPhotoContainerView.swift in Sources */,
 				BAB19CCF207D13F200A0A44B /* FlashButton.swift in Sources */,
 				BAB19CD620850ECB00A0A44B /* PhotoCollectionView.swift in Sources */,

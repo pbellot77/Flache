@@ -19,14 +19,21 @@ class PreviewPhotoContainerView: UIView {
 	
 	let cancelButton: UIButton = {
 		let button = UIButton(type: .system)
-		button.setImage(#imageLiteral(resourceName: "cancel_shadow"), for: .normal)
+		button.setImage(#imageLiteral(resourceName: "Cancel"), for: .normal)
 		button.addTarget(self, action: #selector(handleCancel), for: .touchUpInside)
+		return button
+	}()
+	
+	let shareButton: UIButton = {
+		let button = UIButton(type: .system)
+		button.setImage(#imageLiteral(resourceName: "Share"), for: .normal)
+		button.addTarget(self, action: #selector(handleShare), for: .touchUpInside)
 		return button
 	}()
 	
 	let saveButton: UIButton = {
 		let button = UIButton(type: .system)
-		button.setImage(#imageLiteral(resourceName: "save_shadow"), for: .normal)
+		button.setImage(#imageLiteral(resourceName: "Save"), for: .normal)
 		button.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
 		return button
 	}()
@@ -34,6 +41,19 @@ class PreviewPhotoContainerView: UIView {
 	// MARK: -- Selector functions
 	@objc func handleCancel() {
 		self.removeFromSuperview()
+	}
+	
+	@objc func handleShare() {
+		let image = previewImageView.image
+		let imageToShare = [image!]
+		let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
+		activityViewController.popoverPresentationController?.sourceView = PreviewPhotoContainerView()
+		
+		var topVC = UIApplication.shared.keyWindow?.rootViewController
+		while topVC?.presentedViewController != nil {
+			topVC = topVC?.presentedViewController
+		}
+		topVC?.present(activityViewController, animated: true, completion: nil)
 	}
 	
 	@objc func handleSave() {
@@ -67,7 +87,7 @@ class PreviewPhotoContainerView: UIView {
 				}, completion: { (completed) in
 					
 					UIView.animate(withDuration: 0.5, delay: 0.70, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
-						savedLabel.layer.transform = CATransform3DMakeScale(0.01, 0.01, 0.01)
+						savedLabel.layer.transform = CATransform3DMakeScale(0.02, 0.02, 0.02)
 					}, completion: { (_) in
 						savedLabel.removeFromSuperview()
 						self.removeFromSuperview()
@@ -84,10 +104,13 @@ class PreviewPhotoContainerView: UIView {
 		previewImageView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
 		
 		add(cancelButton)
-		cancelButton.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 15, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 50, height: 50)
+		cancelButton.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 15, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 48, height: 48)
 		
 		add(saveButton)
 		saveButton.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 24, paddingBottom: 24, paddingRight: 0, width: 50, height: 50)
+		
+		add(shareButton)
+		shareButton.anchor(top: topAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 15, paddingLeft: 0, paddingBottom: 0, paddingRight: 12, width: 50, height: 50)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
