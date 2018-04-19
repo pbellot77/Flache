@@ -71,7 +71,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	// MARK: -- Private Functions
 	fileprivate func setupCaptureDevice() {
 		let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTelephotoCamera, .builtInTrueDepthCamera],
-																												mediaType: .video, position: .unspecified)
+																														mediaType: .video, position: .unspecified)
 		discoverySession.devices.forEach { (device) in
 			if device.position == .back {
 				backCamera = device
@@ -98,7 +98,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		
 		view.add(thumbnailImage)
 		thumbnailImage.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil,
-												paddingTop: 0, paddingLeft: 16, paddingBottom: 48, paddingRight: 0, width: 50, height: 50)
+													paddingTop: 0, paddingLeft: 16, paddingBottom: 48, paddingRight: 0, width: 50, height: 50)
 		
 		let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoom(pinch:)))
 		view.addGestureRecognizer(pinchGesture)
