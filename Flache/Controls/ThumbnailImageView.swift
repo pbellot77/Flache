@@ -11,28 +11,27 @@ import Photos
 
 class ThumbnailImageView: UIImageView {
 	
-	func getLastImage(){
+	func fetchPhotos () {
 		let fetchOptions = PHFetchOptions()
-		fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+		fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: false)]
 		fetchOptions.fetchLimit = 1
-		
+	
 		let fetchResult: PHFetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
 		if fetchResult.count > 0 {
-			fetchPhotoAtIndex(0, fetchResult: fetchResult)
+			fetchPhotoAtIndex(0, fetchResult)
 		}
 	}
 	
-	func fetchPhotoAtIndex(_ index: Int, fetchResult: PHFetchResult<PHAsset>) {
+	func fetchPhotoAtIndex(_ index: Int, _ fetchResult: PHFetchResult<PHAsset>) {
 		let requestOptions = PHImageRequestOptions()
 		requestOptions.isSynchronous = true
 		
-		PHImageManager.default().requestImage(for: fetchResult.object(at: index) as PHAsset, targetSize: CGSize(width: 50, height: 50), contentMode: .aspectFill, options: requestOptions) { (image, _) in
+		let manager = PHImageManager()
+		manager.requestImage(for: fetchResult.object(at: index) as PHAsset, targetSize: CGSize(width: 50, height: 50), contentMode: PHImageContentMode.aspectFill, options: requestOptions, resultHandler: { (image, _) in
 			if let image = image {
-				DispatchQueue.main.async {
 					self.image = image
-					self.getLastImage()
-				}
 			}
-		}
+		})
 	}
 }
+

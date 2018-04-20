@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import Photos
 
 class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	
@@ -38,11 +39,11 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	
 	let thumbnailImage: ThumbnailImageView = {
 		let iv = ThumbnailImageView()
-		iv.getLastImage()
 		iv.backgroundColor = .white
 		iv.layer.cornerRadius = 10
 		iv.clipsToBounds = true
 		iv.isUserInteractionEnabled = true
+		iv.fetchPhotos()
 		return iv
 	}()
 	
@@ -63,12 +64,35 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	override func loadView() {
 		super.loadView()
 		
-		setupCaptureDevice()
-		setupCaptureSession()
-		setupHUD()
+		checkPermissions()
 	}
 	
 	// MARK: -- Private Functions
+	fileprivate func checkPermissions() {
+		let authStatus = AVCaptureDevice.authorizationStatus(for: .video)
+		switch authStatus {
+		case .authorized:
+			setupCaptureDevice()
+			setupCaptureSession()
+			setupHUD()
+		case .denied:
+			alertPromptToAllowCameraAccess()
+		default:
+			setupCaptureDevice()
+			setupCaptureSession()
+			setupHUD()
+		}
+	}
+	
+	func alertPromptToAllowCameraAccess() {
+		let alert = UIAlertController(title: "Error", message: "Camera access is required", preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+		alert.addAction(UIAlertAction(title: "Settings", style: .cancel, handler: { (alert) in
+			UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!)
+		}))
+		present(alert, animated: true, completion: nil)
+	}
+	
 	fileprivate func setupCaptureDevice() {
 		let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTelephotoCamera, .builtInTrueDepthCamera],
 																														mediaType: .video, position: .unspecified)

@@ -14,6 +14,7 @@ class PhotoCollectionView: UICollectionViewController, UICollectionViewDelegateF
 	let cellID = "cellID"
 	
 	var latestPhotoAssets: PHFetchResult<PHAsset>? = nil
+	
 	override var prefersStatusBarHidden: Bool {
 		return true
 	}
