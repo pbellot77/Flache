@@ -27,7 +27,7 @@ class ThumbnailImageView: UIImageView {
 		requestOptions.isSynchronous = true
 		
 		let manager = PHImageManager()
-		manager.requestImage(for: fetchResult.object(at: index) as PHAsset, targetSize: CGSize(width: 50, height: 50), contentMode: PHImageContentMode.aspectFill, options: requestOptions, resultHandler: { (image, _) in
+		manager.requestImage(for: fetchResult.object(at: index) as PHAsset, targetSize: CGSize(width: 50, height: 50), contentMode: .aspectFill, options: requestOptions, resultHandler: { (image, _) in
 			if let image = image {
 					self.image = image
 			}

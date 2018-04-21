@@ -84,7 +84,7 @@ class PhotoCollectionView: UICollectionViewController, UICollectionViewDelegateF
 		
 		guard let asset = self.latestPhotoAssets?[indexPath.item] else { return cell }
 		cell.representedAssetIdentifier = asset.localIdentifier
-		manager.requestImage(for: asset, targetSize: CGSize(width: 400, height: 400), contentMode: .aspectFill, options: nil) { (image, _) in
+		manager.requestImage(for: asset, targetSize: CGSize(width: 500, height: 500), contentMode: .aspectFill, options: nil) { (image, _) in
 			if cell.representedAssetIdentifier == asset.localIdentifier {
 				cell.photoImageView.image = image
 			}
