@@ -9,7 +9,13 @@
 import UIKit
 import Photos
 
+protocol SaveDelegate {
+	func didSaveImage(image: UIImage)
+}
+
 class PreviewPhotoContainerView: UIView {
+	
+	var saveDelegate: SaveDelegate!
 	
 	// MARK: -- Properties
 	let previewImageView: UIImageView = {
@@ -95,6 +101,7 @@ class PreviewPhotoContainerView: UIView {
 				})
 			}
 		}
+		saveDelegate.didSaveImage(image: previewImage)
 	}
 	
 	override init(frame: CGRect) {

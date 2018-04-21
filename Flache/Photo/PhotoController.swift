@@ -185,6 +185,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 												 bottom: view.bottomAnchor, right: view.rightAnchor,
 												 paddingTop: 0, paddingLeft: 0, paddingBottom: 0,
 												 paddingRight: 0, width: 0, height: 0)
+		containerView.saveDelegate = self
 	}
 	
 	func flipImage(image: UIImage) -> UIImage {
@@ -257,3 +258,19 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		}
 	}
 }
+
+extension PhotoController: SaveDelegate {
+	
+	func didSaveImage(image: UIImage) {
+		thumbnailImage.image = image
+	}
+}
+
+
+
+
+
+
+
+
+
