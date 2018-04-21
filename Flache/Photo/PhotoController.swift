@@ -77,6 +77,23 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 			setupHUD()
 		case .denied:
 			alertPromptToAllowCameraAccess()
+		case .notDetermined:
+			AVCaptureDevice.requestAccess(for: .video) { (cameraAccess) in
+				print(cameraAccess)
+				
+				if cameraAccess {
+					DispatchQueue.main.async {
+						self.setupCaptureDevice()
+						self.setupCaptureSession()
+						self.setupHUD()
+						self.thumbnailImage.fetchPhotos()
+					}
+				} else {
+					DispatchQueue.main.async {
+						self.alertPromptToAllowCameraAccess()
+					}
+				}
+			}
 		default:
 			setupCaptureDevice()
 			setupCaptureSession()
