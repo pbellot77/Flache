@@ -265,12 +265,3 @@ extension PhotoController: SaveDelegate {
 		thumbnailImage.image = image
 	}
 }
-
-
-
-
-
-
-
-
-
