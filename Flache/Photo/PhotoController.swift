@@ -70,22 +70,20 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		let touchPoint = touches.first! as UITouch
 		let screenSize = view.bounds.size
-		let focusPoint = CGPoint(x: touchPoint.location(in: view).y / screenSize.height, y: 1.0 - touchPoint.location(in: view).x / screenSize.width)
+		let focusPoint = CGPoint(x: touchPoint.location(in: view).y / screenSize.height, y: 1.0 - touchPoint.location(in: view).x / screenSize.height)
 		
 		if let device = captureDevice {
 			do {
 				try device.lockForConfiguration()
-				if device.isFocusPointOfInterestSupported {
+				if device.isFocusPointOfInterestSupported && device.isExposurePointOfInterestSupported {
 					device.focusPointOfInterest = focusPoint
 					device.focusMode = .autoFocus
-				}
-				if device.isExposurePointOfInterestSupported {
 					device.exposurePointOfInterest = focusPoint
 					device.exposureMode = .autoExpose
 				}
 				device.unlockForConfiguration()
 			} catch {
-				print("Unable to set focus or exposure")
+				print("Could not lock configuration")
 			}
 		}
 	}
@@ -134,7 +132,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	}
 	
 	fileprivate func setupCaptureDevice() {
-		let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTelephotoCamera, .builtInTrueDepthCamera],
+		let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInDualCamera, .builtInWideAngleCamera],
 																														mediaType: .video, position: .unspecified)
 		discoverySession.devices.forEach { (device) in
 			if device.position == .back {
