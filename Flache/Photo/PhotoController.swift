@@ -67,6 +67,29 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		checkPermissions()
 	}
 	
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		let touchPoint = touches.first! as UITouch
+		let screenSize = view.bounds.size
+		let focusPoint = CGPoint(x: touchPoint.location(in: view).y / screenSize.height, y: 1.0 - touchPoint.location(in: view).x / screenSize.width)
+		
+		if let device = captureDevice {
+			do {
+				try device.lockForConfiguration()
+				if device.isFocusPointOfInterestSupported {
+					device.focusPointOfInterest = focusPoint
+					device.focusMode = .autoFocus
+				}
+				if device.isExposurePointOfInterestSupported {
+					device.exposurePointOfInterest = focusPoint
+					device.exposureMode = .autoExpose
+				}
+				device.unlockForConfiguration()
+			} catch {
+				print("Unable to set focus or exposure")
+			}
+		}
+	}
+	
 	// MARK: -- Private Functions
 	fileprivate func checkPermissions() {
 		let authStatus = AVCaptureDevice.authorizationStatus(for: .video)
@@ -101,7 +124,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		}
 	}
 	
-	func alertPromptToAllowCameraAccess() {
+	fileprivate func alertPromptToAllowCameraAccess() {
 		let alert = UIAlertController(title: "Error", message: "Camera access is required", preferredStyle: .alert)
 		alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
 		alert.addAction(UIAlertAction(title: "Settings", style: .cancel, handler: { (alert) in
