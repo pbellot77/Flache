@@ -211,7 +211,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	@objc func handleCameraToggle() {
 		captureSession.beginConfiguration()
 		captureDevice = toggleCamera ? backCamera : frontCamera
-		toggleCamera = !toggleCamera
+		toggleCamera.toggle()
 		captureSession.inputs.forEach { captureSession.removeInput($0) }
 		do {
 			let newInput = try AVCaptureDeviceInput(device: captureDevice!)
