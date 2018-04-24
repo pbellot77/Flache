@@ -146,20 +146,20 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	
 	fileprivate func setupHUD() {
 		view.add(capturePhotoButton)
-		capturePhotoButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: nil,
+		capturePhotoButton.anchor(top: nil, left: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: nil,
 															paddingTop: 0, paddingLeft: 0, paddingBottom: 24, paddingRight: 0, width: 100, height: 100)
 		capturePhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		
 		view.add(switchCameraButton)
-		switchCameraButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: view.rightAnchor,
+		switchCameraButton.anchor(top: nil, left: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor,
 															paddingTop: 0, paddingLeft: 0, paddingBottom: 48, paddingRight: 16, width: 50, height: 50)
 		
 		view.add(flashButton)
-		flashButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor,
+		flashButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: nil, bottom: nil, right: view.safeAreaLayoutGuide.rightAnchor,
 											 paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: 16, width: 50, height: 50)
 		
 		view.add(thumbnailImage)
-		thumbnailImage.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil,
+		thumbnailImage.anchor(top: nil, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: nil,
 													paddingTop: 0, paddingLeft: 16, paddingBottom: 48, paddingRight: 0, width: 50, height: 50)
 		
 		let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoom(pinch:)))
