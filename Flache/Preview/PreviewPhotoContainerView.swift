@@ -20,7 +20,7 @@ class PreviewPhotoContainerView: UIView {
 	// MARK: -- Properties
 	let previewImageView: UIImageView = {
 		let iv = UIImageView()
-		iv.contentMode = .scaleAspectFit
+		iv.contentMode = .scaleAspectFill
 		return iv
 	}()
 	
@@ -97,7 +97,7 @@ class PreviewPhotoContainerView: UIView {
 						savedLabel.layer.transform = CATransform3DMakeScale(0.02, 0.02, 0.02)
 					}, completion: { (_) in
 						savedLabel.removeFromSuperview()
-						self.removeFromSuperview()
+							self.removeFromSuperview()
 					})
 				})
 			}
