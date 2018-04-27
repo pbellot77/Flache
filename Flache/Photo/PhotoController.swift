@@ -40,6 +40,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	let thumbnailImage: ThumbnailImageView = {
 		let iv = ThumbnailImageView()
 		iv.backgroundColor = .white
+		iv.contentMode = .scaleAspectFill
 		iv.layer.cornerRadius = 10
 		iv.clipsToBounds = true
 		iv.isUserInteractionEnabled = true
