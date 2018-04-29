@@ -17,15 +17,15 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>6</string>
+	<string>7</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>We would like to access your camera</string>
+	<string>Please allow camera access to start taking photos with Flache</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>We would like to access your microphone</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We would like to access you photos</string>
+	<string>Allow access to photos for viewing and sharing. Photo data is not collected.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
