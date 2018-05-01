@@ -40,6 +40,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	let thumbnailImage: ThumbnailImageView = {
 		let iv = ThumbnailImageView()
 		iv.backgroundColor = .white
+		iv.contentMode = .scaleAspectFill
 		iv.layer.cornerRadius = 10
 		iv.clipsToBounds = true
 		iv.isUserInteractionEnabled = true
@@ -65,6 +66,27 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		super.loadView()
 		
 		checkPermissions()
+	}
+	
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		let touchPoint = touches.first! as UITouch
+		let screenSize = view.bounds.size
+		let focusPoint = CGPoint(x: touchPoint.location(in: view).y / screenSize.height, y: 1.0 - touchPoint.location(in: view).x / screenSize.height)
+		
+		if let device = captureDevice {
+			do {
+				try device.lockForConfiguration()
+				if device.isFocusPointOfInterestSupported && device.isExposurePointOfInterestSupported {
+					device.focusPointOfInterest = focusPoint
+					device.focusMode = .autoFocus
+					device.exposurePointOfInterest = focusPoint
+					device.exposureMode = .autoExpose
+				}
+				device.unlockForConfiguration()
+			} catch {
+				print("Could not lock configuration")
+			}
+		}
 	}
 	
 	// MARK: -- Private Functions
@@ -101,7 +123,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		}
 	}
 	
-	func alertPromptToAllowCameraAccess() {
+	fileprivate func alertPromptToAllowCameraAccess() {
 		let alert = UIAlertController(title: "Error", message: "Camera access is required", preferredStyle: .alert)
 		alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
 		alert.addAction(UIAlertAction(title: "Settings", style: .cancel, handler: { (alert) in
@@ -111,7 +133,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	}
 	
 	fileprivate func setupCaptureDevice() {
-		let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTelephotoCamera, .builtInTrueDepthCamera],
+		let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInDualCamera, .builtInWideAngleCamera],
 																														mediaType: .video, position: .unspecified)
 		discoverySession.devices.forEach { (device) in
 			if device.position == .back {
@@ -125,20 +147,20 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	
 	fileprivate func setupHUD() {
 		view.add(capturePhotoButton)
-		capturePhotoButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: nil,
+		capturePhotoButton.anchor(top: nil, left: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: nil,
 															paddingTop: 0, paddingLeft: 0, paddingBottom: 24, paddingRight: 0, width: 100, height: 100)
 		capturePhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		
 		view.add(switchCameraButton)
-		switchCameraButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: view.rightAnchor,
+		switchCameraButton.anchor(top: nil, left: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor,
 															paddingTop: 0, paddingLeft: 0, paddingBottom: 48, paddingRight: 16, width: 50, height: 50)
 		
 		view.add(flashButton)
-		flashButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor,
+		flashButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: nil, bottom: nil, right: view.safeAreaLayoutGuide.rightAnchor,
 											 paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: 16, width: 50, height: 50)
 		
 		view.add(thumbnailImage)
-		thumbnailImage.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil,
+		thumbnailImage.anchor(top: nil, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: nil,
 													paddingTop: 0, paddingLeft: 16, paddingBottom: 48, paddingRight: 0, width: 50, height: 50)
 		
 		let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoom(pinch:)))
@@ -211,7 +233,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	@objc func handleCameraToggle() {
 		captureSession.beginConfiguration()
 		captureDevice = toggleCamera ? backCamera : frontCamera
-		toggleCamera = !toggleCamera
+		toggleCamera.toggle()
 		captureSession.inputs.forEach { captureSession.removeInput($0) }
 		do {
 			let newInput = try AVCaptureDeviceInput(device: captureDevice!)

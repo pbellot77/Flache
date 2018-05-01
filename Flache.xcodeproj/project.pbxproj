@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA3FE1E0208E356000E083D1 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3FE1DF208E356000E083D1 /* Bool.swift */; };
 		BA9A7A472065862B00050D46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9A7A462065862B00050D46 /* AppDelegate.swift */; };
 		BA9A7A4E2065862D00050D46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA9A7A4D2065862D00050D46 /* Assets.xcassets */; };
 		BA9A7A512065862D00050D46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA9A7A4F2065862D00050D46 /* LaunchScreen.storyboard */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA3FE1DF208E356000E083D1 /* Bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bool.swift; sourceTree = "<group>"; };
 		BA9A7A432065862B00050D46 /* Flache.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flache.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA9A7A462065862B00050D46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA9A7A4D2065862D00050D46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			children = (
 				BA9A7A77206589AB00050D46 /* UIView.swift */,
 				BAB19CD7208528A100A0A44B /* UIColor.swift */,
+				BA3FE1DF208E356000E083D1 /* Bool.swift */,
 			);
 			path = Utilis;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				BAB19CD32083D43C00A0A44B /* ThumbnailImageView.swift in Sources */,
 				BAB19CDA208640D900A0A44B /* PhotoCell.swift in Sources */,
 				BA9A7A7A2065907200050D46 /* PreviewPhotoContainerView.swift in Sources */,
+				BA3FE1E0208E356000E083D1 /* Bool.swift in Sources */,
 				BAB19CCF207D13F200A0A44B /* FlashButton.swift in Sources */,
 				BAB19CD620850ECB00A0A44B /* PhotoCollectionView.swift in Sources */,
 				BA9A7A752065872500050D46 /* PhotoController.swift in Sources */,
@@ -497,7 +501,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.patrickBellot.Flache;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -516,7 +520,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.patrickBellot.Flache;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
