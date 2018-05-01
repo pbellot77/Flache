@@ -151,23 +151,32 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 															paddingTop: 0, paddingLeft: 0, paddingBottom: 24, paddingRight: 0, width: 100, height: 100)
 		capturePhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		
-		view.add(switchCameraButton)
-		switchCameraButton.anchor(top: nil, left: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor,
-															paddingTop: 0, paddingLeft: 0, paddingBottom: 48, paddingRight: 16, width: 50, height: 50)
-		
-		view.add(flashButton)
-		flashButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: nil, bottom: nil, right: view.safeAreaLayoutGuide.rightAnchor,
-											 paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: 16, width: 50, height: 50)
+		setupButtons()
+//		view.add(switchCameraButton)
+//		switchCameraButton.anchor(top: nil, left: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor,
+//															paddingTop: 0, paddingLeft: 0, paddingBottom: 48, paddingRight: 16, width: 50, height: 50)
+//
+//		view.add(flashButton)
+//		flashButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: nil, bottom: nil, right: view.safeAreaLayoutGuide.rightAnchor,
+//											 paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: 16, width: 50, height: 50)
 		
 		view.add(thumbnailImage)
 		thumbnailImage.anchor(top: nil, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: nil,
-													paddingTop: 0, paddingLeft: 16, paddingBottom: 48, paddingRight: 0, width: 50, height: 50)
+													paddingTop: 0, paddingLeft: 40, paddingBottom: 45, paddingRight: 0, width: 55, height: 55)
 		
 		let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoom(pinch:)))
 		view.addGestureRecognizer(pinchGesture)
 		
 		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(tap:)))
 		thumbnailImage.addGestureRecognizer(tapGesture)
+	}
+	
+	fileprivate func setupButtons() {
+		let stackView = UIStackView(arrangedSubviews: [switchCameraButton, flashButton])
+		stackView.distribution = .equalSpacing
+		
+		view.add(stackView)
+		stackView.anchor(top: nil, left: capturePhotoButton.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 45, paddingRight: 8, width: 0, height: 0)
 	}
 	
 	fileprivate func setupCaptureSession() {
