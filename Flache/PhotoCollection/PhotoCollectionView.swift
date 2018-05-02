@@ -81,10 +81,12 @@ class PhotoCollectionView: UICollectionViewController, UICollectionViewDelegateF
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! PhotoCell
 		let manager = PHImageManager()
+		let options = PHImageRequestOptions()
+		options.isNetworkAccessAllowed = true
 		
 		guard let asset = self.latestPhotoAssets?[indexPath.item] else { return cell }
 		cell.representedAssetIdentifier = asset.localIdentifier
-		manager.requestImage(for: asset, targetSize: CGSize(width: 500, height: 500), contentMode: .aspectFill, options: nil) { (image, _) in
+		manager.requestImage(for: asset, targetSize: CGSize(width: 500, height: 500), contentMode: .aspectFill, options: options) { (image, _) in
 			if cell.representedAssetIdentifier == asset.localIdentifier {
 				cell.photoImageView.image = image
 			}
