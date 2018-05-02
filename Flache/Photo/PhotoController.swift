@@ -155,7 +155,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		
 		view.add(thumbnailImage)
 		thumbnailImage.anchor(top: nil, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: nil,
-													paddingTop: 0, paddingLeft: 40, paddingBottom: 45, paddingRight: 0, width: 55, height: 55)
+													paddingTop: 0, paddingLeft: 50, paddingBottom: 45, paddingRight: 0, width: 55, height: 55)
 		
 		let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoom(pinch:)))
 		view.addGestureRecognizer(pinchGesture)
