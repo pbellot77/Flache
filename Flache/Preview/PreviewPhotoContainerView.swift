@@ -26,7 +26,7 @@ class PreviewPhotoContainerView: UIView {
 	
 	let cancelButton: UIButton = {
 		let button = UIButton(type: .system)
-		button.setImage(#imageLiteral(resourceName: "Cancel"), for: .normal)
+		button.setImage(#imageLiteral(resourceName: "OvalCancel"), for: .normal)
 		button.addTarget(self, action: #selector(handleCancel), for: .touchUpInside)
 		return button
 	}()
@@ -93,11 +93,11 @@ class PreviewPhotoContainerView: UIView {
 					savedLabel.layer.transform = CATransform3DMakeScale(1, 1, 1)
 				}, completion: { (completed) in
 					
-					UIView.animate(withDuration: 0.5, delay: 0.70, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+					UIView.animate(withDuration: 0.5, delay: 0.50, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
 						savedLabel.layer.transform = CATransform3DMakeScale(0.01, 0.01, 0.01)
 					}, completion: { (_) in
 						savedLabel.removeFromSuperview()
-							self.removeFromSuperview()
+						self.removeFromSuperview()
 					})
 				})
 			}
@@ -111,14 +111,15 @@ class PreviewPhotoContainerView: UIView {
 		add(previewImageView)
 		previewImageView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
 		
-		add(cancelButton)
-		cancelButton.anchor(top: self.safeAreaLayoutGuide.topAnchor, left: self.safeAreaLayoutGuide.leftAnchor, bottom: nil, right: nil, paddingTop: 15, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 48, height: 48)
+		setupUI()
+	}
+	
+	fileprivate func setupUI() {
+		let stackView = UIStackView(arrangedSubviews: [saveButton, cancelButton, shareButton])
+		stackView.distribution = .fillEqually
 		
-		add(saveButton)
-		saveButton.anchor(top: nil, left: self.safeAreaLayoutGuide.leftAnchor, bottom: self.safeAreaLayoutGuide.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 24, paddingBottom: 24, paddingRight: 0, width: 50, height: 50)
-		
-		add(shareButton)
-		shareButton.anchor(top: self.safeAreaLayoutGuide.topAnchor, left: nil, bottom: nil, right: self.safeAreaLayoutGuide.rightAnchor, paddingTop: 15, paddingLeft: 0, paddingBottom: 0, paddingRight: 12, width: 50, height: 50)
+		self.add(stackView)
+		stackView.anchor(top: nil, left: self.safeAreaLayoutGuide.leftAnchor, bottom: self.safeAreaLayoutGuide.bottomAnchor, right: self.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 45, paddingRight: 0, width: 0, height: 0)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {

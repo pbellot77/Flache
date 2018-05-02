@@ -81,10 +81,12 @@ class PhotoCollectionView: UICollectionViewController, UICollectionViewDelegateF
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! PhotoCell
 		let manager = PHImageManager()
+		let options = PHImageRequestOptions()
+		options.isNetworkAccessAllowed = true
 		
 		guard let asset = self.latestPhotoAssets?[indexPath.item] else { return cell }
 		cell.representedAssetIdentifier = asset.localIdentifier
-		manager.requestImage(for: asset, targetSize: CGSize(width: 500, height: 500), contentMode: .aspectFill, options: nil) { (image, _) in
+		manager.requestImage(for: asset, targetSize: CGSize(width: 500, height: 500), contentMode: .aspectFill, options: options) { (image, _) in
 			if cell.representedAssetIdentifier == asset.localIdentifier {
 				cell.photoImageView.image = image
 			}
@@ -98,9 +100,13 @@ class PhotoCollectionView: UICollectionViewController, UICollectionViewDelegateF
 		let containerView = PreviewPhotoContainerView()
 		containerView.previewImageView.image = cell.photoImageView.image
 		containerView.previewImageView.contentMode = .scaleAspectFill
-		navigationController?.view.add(containerView)
-		containerView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor,
+		
+		UIView.transition(with: containerView, duration: 0.25, options: .transitionCurlDown, animations: {
+			self.navigationController?.view.add(containerView)
+			containerView.anchor(top: self.view.topAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor,
 													 paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-		containerView.saveButton.isHidden = true
+			containerView.saveButton.isHidden = true
+		}, completion: nil)
+	
 	}
 }
