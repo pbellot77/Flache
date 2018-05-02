@@ -62,9 +62,9 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		return button
 	}()
 	
+	// MARK: -- LoadView
 	override func loadView() {
 		super.loadView()
-		
 		checkPermissions()
 	}
 	
@@ -169,7 +169,8 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		stackView.distribution = .equalSpacing
 		
 		view.add(stackView)
-		stackView.anchor(top: nil, left: capturePhotoButton.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 45, paddingRight: 8, width: 0, height: 0)
+		stackView.anchor(top: nil, left: capturePhotoButton.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor,
+										 paddingTop: 0, paddingLeft: 12, paddingBottom: 45, paddingRight: 8, width: 0, height: 0)
 	}
 	
 	fileprivate func setupCaptureSession() {
@@ -284,7 +285,6 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 }
 
 extension PhotoController: SaveDelegate {
-	
 	func didSaveImage(image: UIImage) {
 		thumbnailImage.image = image
 	}
