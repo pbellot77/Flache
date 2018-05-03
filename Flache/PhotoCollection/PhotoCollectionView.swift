@@ -19,6 +19,11 @@ class PhotoCollectionView: UICollectionViewController, UICollectionViewDelegateF
 		return true
 	}
 	
+	let progressView: UIProgressView = {
+		let progressView = UIProgressView()
+		return progressView
+	}()
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupNavBar()
@@ -82,13 +87,19 @@ class PhotoCollectionView: UICollectionViewController, UICollectionViewDelegateF
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! PhotoCell
 		let manager = PHImageManager()
 		let options = PHImageRequestOptions()
+		options.version = .current
+		options.deliveryMode = .highQualityFormat
 		options.isNetworkAccessAllowed = true
-		
+		options.progressHandler = { (progress, _, _, _) in
+			self.progressView.progress = Float(progress)
+		}
 		guard let asset = self.latestPhotoAssets?[indexPath.item] else { return cell }
 		cell.representedAssetIdentifier = asset.localIdentifier
 		manager.requestImage(for: asset, targetSize: CGSize(width: 500, height: 500), contentMode: .aspectFill, options: options) { (image, _) in
 			if cell.representedAssetIdentifier == asset.localIdentifier {
-				cell.photoImageView.image = image
+				DispatchQueue.main.async {
+					cell.photoImageView.image = image
+				}
 			}
 		}
 		return cell

@@ -147,14 +147,14 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	
 	fileprivate func setupHUD() {
 		view.add(capturePhotoButton)
-		capturePhotoButton.anchor(top: nil, left: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: nil,
+		capturePhotoButton.anchor(top: nil, left: nil, bottom: self.view.safeAreaLayoutGuide.bottomAnchor, right: nil,
 															paddingTop: 0, paddingLeft: 0, paddingBottom: 24, paddingRight: 0, width: 100, height: 100)
-		capturePhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+		capturePhotoButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
 		
 		setupButtons()
 		
 		view.add(thumbnailImage)
-		thumbnailImage.anchor(top: nil, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: nil,
+		thumbnailImage.anchor(top: nil, left: self.view.safeAreaLayoutGuide.leftAnchor, bottom: self.view.safeAreaLayoutGuide.bottomAnchor, right: nil,
 													paddingTop: 0, paddingLeft: 50, paddingBottom: 45, paddingRight: 0, width: 55, height: 55)
 		
 		let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoom(pinch:)))
@@ -169,7 +169,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		stackView.distribution = .equalSpacing
 		
 		view.add(stackView)
-		stackView.anchor(top: nil, left: capturePhotoButton.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor,
+		stackView.anchor(top: nil, left: capturePhotoButton.rightAnchor, bottom: self.view.safeAreaLayoutGuide.bottomAnchor, right: self.view.safeAreaLayoutGuide.rightAnchor,
 										 paddingTop: 0, paddingLeft: 12, paddingBottom: 45, paddingRight: 8, width: 0, height: 0)
 	}
 	
@@ -187,6 +187,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 			captureSession.addOutput(photoOutput)
 		}
 		let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+		previewLayer.videoGravity = .resizeAspectFill
 		previewLayer.frame = view.frame
 		view.layer.addSublayer(previewLayer)
 		captureSession.startRunning()
