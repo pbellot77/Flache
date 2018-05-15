@@ -44,13 +44,13 @@ class FlashButton: UIButton {
 	
 	fileprivate func setupFlashIcon(_ count: Int){
 		if tapCount == 0 {
-			self.setImage(#imageLiteral(resourceName: "FlashOff"), for: .normal)
+			self.setImage(#imageLiteral(resourceName: "flashOff2"), for: .normal)
 		}
 		if tapCount == 1 {
-			self.setImage(#imageLiteral(resourceName: "FlashOn"), for: .normal)
+			self.setImage(#imageLiteral(resourceName: "flashOn2"), for: .normal)
 		}
 		if tapCount == 2 {
-			self.setImage(#imageLiteral(resourceName: "FlashAuto"), for: .normal)
+			self.setImage(#imageLiteral(resourceName: "flashAuto2"), for: .normal)
 		}
 	}
 	

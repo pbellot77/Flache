@@ -57,7 +57,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	
 	let switchCameraButton: UIButton = {
 		let button = UIButton(type: .system)
-		button.setImage(#imageLiteral(resourceName: "SwitchCamera"), for: .normal)
+		button.setImage(#imageLiteral(resourceName: "switch2"), for: .normal)
 		button.addTarget(self, action: #selector(handleCameraToggle), for: .touchUpInside)
 		return button
 	}()
@@ -166,11 +166,10 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	
 	fileprivate func setupButtons() {
 		let stackView = UIStackView(arrangedSubviews: [switchCameraButton, flashButton])
-		stackView.distribution = .equalSpacing
-		
+		stackView.distribution = .fillEqually
 		view.add(stackView)
 		stackView.anchor(top: nil, left: capturePhotoButton.rightAnchor, bottom: self.view.safeAreaLayoutGuide.bottomAnchor, right: self.view.safeAreaLayoutGuide.rightAnchor,
-										 paddingTop: 0, paddingLeft: 12, paddingBottom: 45, paddingRight: 8, width: 0, height: 0)
+										 paddingTop: 0, paddingLeft: 8, paddingBottom: 45, paddingRight: 16, width: 0, height: 0)
 	}
 	
 	fileprivate func setupCaptureSession() {

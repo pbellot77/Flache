@@ -21,6 +21,7 @@
 		BAB19CD620850ECB00A0A44B /* PhotoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB19CD520850ECB00A0A44B /* PhotoCollectionView.swift */; };
 		BAB19CD8208528A100A0A44B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB19CD7208528A100A0A44B /* UIColor.swift */; };
 		BAB19CDA208640D900A0A44B /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB19CD9208640D900A0A44B /* PhotoCell.swift */; };
+		BAC4937320AB47F500989C02 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC4937220AB47F500989C02 /* UIButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		BAB19CD520850ECB00A0A44B /* PhotoCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionView.swift; sourceTree = "<group>"; };
 		BAB19CD7208528A100A0A44B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		BAB19CD9208640D900A0A44B /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		BAC4937220AB47F500989C02 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 				BA9A7A77206589AB00050D46 /* UIView.swift */,
 				BAB19CD7208528A100A0A44B /* UIColor.swift */,
 				BA3FE1DF208E356000E083D1 /* Bool.swift */,
+				BAC4937220AB47F500989C02 /* UIButton.swift */,
 			);
 			path = Utilis;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				BAB19CD620850ECB00A0A44B /* PhotoCollectionView.swift in Sources */,
 				BA9A7A752065872500050D46 /* PhotoController.swift in Sources */,
 				BAB19CD8208528A100A0A44B /* UIColor.swift in Sources */,
+				BAC4937320AB47F500989C02 /* UIButton.swift in Sources */,
 				BA9A7A78206589AB00050D46 /* UIView.swift in Sources */,
 				BA9A7A472065862B00050D46 /* AppDelegate.swift in Sources */,
 			);
