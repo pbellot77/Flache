@@ -26,21 +26,21 @@ class PreviewPhotoContainerView: UIView {
 	
 	let cancelButton: UIButton = {
 		let button = UIButton(type: .system)
-		button.setImage(#imageLiteral(resourceName: "OvalCancel"), for: .normal)
+		button.setImage(#imageLiteral(resourceName: "cancel2"), for: .normal)
 		button.addTarget(self, action: #selector(handleCancel), for: .touchUpInside)
 		return button
 	}()
 	
 	let shareButton: UIButton = {
 		let button = UIButton(type: .system)
-		button.setImage(#imageLiteral(resourceName: "Share"), for: .normal)
+		button.setImage(#imageLiteral(resourceName: "share2"), for: .normal)
 		button.addTarget(self, action: #selector(handleShare), for: .touchUpInside)
 		return button
 	}()
 	
 	let saveButton: UIButton = {
 		let button = UIButton(type: .system)
-		button.setImage(#imageLiteral(resourceName: "Save"), for: .normal)
+		button.setImage(#imageLiteral(resourceName: "save2"), for: .normal)
 		button.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
 		return button
 	}()
@@ -61,6 +61,8 @@ class PreviewPhotoContainerView: UIView {
 			topVC = topVC?.presentedViewController
 		}
 		topVC?.present(activityViewController, animated: true, completion: nil)
+		
+		saveButton.pulsate()
 	}
 	
 	@objc func handleSave() {
