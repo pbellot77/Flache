@@ -22,6 +22,7 @@
 		BAB19CD8208528A100A0A44B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB19CD7208528A100A0A44B /* UIColor.swift */; };
 		BAB19CDA208640D900A0A44B /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB19CD9208640D900A0A44B /* PhotoCell.swift */; };
 		BAC4937320AB47F500989C02 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC4937220AB47F500989C02 /* UIButton.swift */; };
+		BAE970B720B32A9D003CB9FB /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE970B620B32A9D003CB9FB /* UIViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		BAB19CD7208528A100A0A44B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		BAB19CD9208640D900A0A44B /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		BAC4937220AB47F500989C02 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		BAE970B620B32A9D003CB9FB /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 				BAB19CD7208528A100A0A44B /* UIColor.swift */,
 				BA3FE1DF208E356000E083D1 /* Bool.swift */,
 				BAC4937220AB47F500989C02 /* UIButton.swift */,
+				BAE970B620B32A9D003CB9FB /* UIViewController.swift */,
 			);
 			path = Utilis;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 			files = (
 				BAB19CD32083D43C00A0A44B /* ThumbnailImageView.swift in Sources */,
 				BAB19CDA208640D900A0A44B /* PhotoCell.swift in Sources */,
+				BAE970B720B32A9D003CB9FB /* UIViewController.swift in Sources */,
 				BA9A7A7A2065907200050D46 /* PreviewPhotoContainerView.swift in Sources */,
 				BA3FE1E0208E356000E083D1 /* Bool.swift in Sources */,
 				BAB19CCF207D13F200A0A44B /* FlashButton.swift in Sources */,

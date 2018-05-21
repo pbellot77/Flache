@@ -31,7 +31,9 @@ class PhotoCollectionView: UICollectionViewController, UICollectionViewDelegateF
 		collectionView?.backgroundColor = UIColor.mainBlue()
 		collectionView?.register(PhotoCell.self, forCellWithReuseIdentifier: cellID)
 		
+		checkPhotoPermissions()
 		latestPhotoAssets = self.fetchLatestPhotos(forCount: 24)
+		
 	}
 
 	func setupNavBar() {
@@ -60,6 +62,36 @@ class PhotoCollectionView: UICollectionViewController, UICollectionViewDelegateF
 		options.sortDescriptors = [sortDescriptor]
 		
 		return PHAsset.fetchAssets(with: .image, options: options)
+	}
+	
+	// MARK: -- Private Functions
+	fileprivate func checkPhotoPermissions() {
+		let authStatus = PHPhotoLibrary.authorizationStatus()
+		switch authStatus {
+		case .authorized:
+			DispatchQueue.main.async {
+				self.latestPhotoAssets = self.fetchLatestPhotos(forCount: 24)
+			}
+		case .denied:
+			DispatchQueue.main.async {
+				self.presentAlertForCameraOrPhotoAccess(title: "Error", message: "Please set photo access to read and write")
+			}
+		case .notDetermined:
+			AVCaptureDevice.requestAccess(for: .video) { (photoAccess) in
+				
+				if photoAccess {
+					DispatchQueue.main.async {
+						self.presentAlertForCameraOrPhotoAccess(title: "Error", message: "Please set photo access to read and write")
+					}
+				} else {
+					DispatchQueue.main.async {
+						self.presentAlertForCameraOrPhotoAccess(title: "Error", message: "Please set photo access to read and write")
+					}
+				}
+			}
+		default:
+			latestPhotoAssets = self.fetchLatestPhotos(forCount: 24)
+		}
 	}
 	
 	@objc func handleDismiss() {

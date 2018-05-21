@@ -98,10 +98,9 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 			setupCaptureSession()
 			setupHUD()
 		case .denied:
-			alertPromptToAllowCameraAccess()
+			self.presentAlertForCameraOrPhotoAccess(title: "Error", message: "Please enable camera access")
 		case .notDetermined:
 			AVCaptureDevice.requestAccess(for: .video) { (cameraAccess) in
-				print(cameraAccess)
 				
 				if cameraAccess {
 					DispatchQueue.main.async {
@@ -112,7 +111,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 					}
 				} else {
 					DispatchQueue.main.async {
-						self.alertPromptToAllowCameraAccess()
+						self.presentAlertForCameraOrPhotoAccess(title: "Error", message: "Please enable camera access")
 					}
 				}
 			}
@@ -121,15 +120,6 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 			setupCaptureSession()
 			setupHUD()
 		}
-	}
-	
-	fileprivate func alertPromptToAllowCameraAccess() {
-		let alert = UIAlertController(title: "Error", message: "Camera access is required", preferredStyle: .alert)
-		alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
-		alert.addAction(UIAlertAction(title: "Settings", style: .cancel, handler: { (alert) in
-			UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!)
-		}))
-		present(alert, animated: true, completion: nil)
 	}
 	
 	fileprivate func setupCaptureDevice() {
