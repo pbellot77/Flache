@@ -137,15 +137,18 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	
 	fileprivate func setupHUD() {
 		view.add(capturePhotoButton)
-		capturePhotoButton.anchor(top: nil, left: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: nil,
-															paddingTop: 0, paddingLeft: 0, paddingBottom: 24, paddingRight: 0, width: 100, height: 100)
+		capturePhotoButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: nil,
+															paddingTop: 0, paddingLeft: 0, paddingBottom: 50, paddingRight: 0, width: 100, height: 100)
 		capturePhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		
 		setupButtons()
 		
 		view.add(thumbnailImage)
-		thumbnailImage.anchor(top: nil, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: nil,
-													paddingTop: 0, paddingLeft: 50, paddingBottom: 45, paddingRight: 0, width: 50, height: 50)
+		thumbnailImage.anchor(top: nil, left: nil, bottom: capturePhotoButton.bottomAnchor, right: capturePhotoButton.leftAnchor,
+													paddingTop: 0, paddingLeft: 0, paddingBottom: 25, paddingRight: 20, width: 50, height: 50)
+		
+		view.add(switchCameraButton)
+		switchCameraButton.anchor(top: nil, left: capturePhotoButton.rightAnchor, bottom: capturePhotoButton.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 16, paddingBottom: 25, paddingRight: 0, width: 50, height: 50)
 		
 		let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoom(pinch:)))
 		view.addGestureRecognizer(pinchGesture)
@@ -155,11 +158,13 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	}
 	
 	fileprivate func setupButtons() {
-		let stackView = UIStackView(arrangedSubviews: [switchCameraButton, flashButton])
+		// MARK: -- TODO: Add Portrait Mode button here!
+		let stackView = UIStackView(arrangedSubviews: [flashButton])
 		stackView.distribution = .fillEqually
 		view.add(stackView)
-		stackView.anchor(top: nil, left: capturePhotoButton.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor,
-										 paddingTop: 0, paddingLeft: 8, paddingBottom: 45, paddingRight: 16, width: 0, height: 50)
+		stackView.anchor(top: nil, left: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: nil,
+										 paddingTop: 0, paddingLeft: 0, paddingBottom: 5, paddingRight: 0, width: 0, height: 40)
+		stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 	}
 	
 	fileprivate func setupCaptureSession() {
