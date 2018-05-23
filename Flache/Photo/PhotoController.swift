@@ -219,6 +219,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 		let settings = AVCapturePhotoSettings()
 		guard let previewFormatType = settings.availablePreviewPhotoPixelFormatTypes.first else { return }
 		settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewFormatType]
+		settings.isAutoStillImageStabilizationEnabled = true
 		if (captureDevice?.hasFlash)! {
 			settings.flashMode = flashButton.currentFlashMode
 			print("Flash detected on this device")
