@@ -23,6 +23,10 @@
 		BAB19CDA208640D900A0A44B /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB19CD9208640D900A0A44B /* PhotoCell.swift */; };
 		BAC4937320AB47F500989C02 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC4937220AB47F500989C02 /* UIButton.swift */; };
 		BAE970B720B32A9D003CB9FB /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE970B620B32A9D003CB9FB /* UIViewController.swift */; };
+		BAE970BC20B72FE6003CB9FB /* FLFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE970BB20B72FE6003CB9FB /* FLFilter.swift */; };
+		BAE970BE20B73DF5003CB9FB /* FLSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE970BD20B73DF5003CB9FB /* FLSlider.swift */; };
+		BAE970C020B74498003CB9FB /* FLSliderDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE970BF20B74498003CB9FB /* FLSliderDataSource.swift */; };
+		BAE970C220B75E50003CB9FB /* FLUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE970C120B75E50003CB9FB /* FLUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +69,10 @@
 		BAB19CD9208640D900A0A44B /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		BAC4937220AB47F500989C02 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		BAE970B620B32A9D003CB9FB /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		BAE970BB20B72FE6003CB9FB /* FLFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLFilter.swift; sourceTree = "<group>"; };
+		BAE970BD20B73DF5003CB9FB /* FLSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLSlider.swift; sourceTree = "<group>"; };
+		BAE970BF20B74498003CB9FB /* FLSliderDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLSliderDataSource.swift; sourceTree = "<group>"; };
+		BAE970C120B75E50003CB9FB /* FLUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				BA9A7A792065907200050D46 /* PreviewPhotoContainerView.swift */,
+				BAE970BA20B618DE003CB9FB /* Filter */,
 			);
 			path = Preview;
 			sourceTree = "<group>";
@@ -190,6 +199,17 @@
 				BAB19CD9208640D900A0A44B /* PhotoCell.swift */,
 			);
 			path = PhotoCollection;
+			sourceTree = "<group>";
+		};
+		BAE970BA20B618DE003CB9FB /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				BAE970BB20B72FE6003CB9FB /* FLFilter.swift */,
+				BAE970BD20B73DF5003CB9FB /* FLSlider.swift */,
+				BAE970BF20B74498003CB9FB /* FLSliderDataSource.swift */,
+				BAE970C120B75E50003CB9FB /* FLUtils.swift */,
+			);
+			path = Filter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,8 +351,12 @@
 				BAB19CD620850ECB00A0A44B /* PhotoCollectionView.swift in Sources */,
 				BA9A7A752065872500050D46 /* PhotoController.swift in Sources */,
 				BAB19CD8208528A100A0A44B /* UIColor.swift in Sources */,
+				BAE970BC20B72FE6003CB9FB /* FLFilter.swift in Sources */,
 				BAC4937320AB47F500989C02 /* UIButton.swift in Sources */,
+				BAE970C220B75E50003CB9FB /* FLUtils.swift in Sources */,
+				BAE970C020B74498003CB9FB /* FLSliderDataSource.swift in Sources */,
 				BA9A7A78206589AB00050D46 /* UIView.swift in Sources */,
+				BAE970BE20B73DF5003CB9FB /* FLSlider.swift in Sources */,
 				BA9A7A472065862B00050D46 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,7 +16,7 @@ protocol SaveDelegate {
 class PreviewPhotoContainerView: UIView {
 	
 	var saveDelegate: SaveDelegate!
-	
+
 	// MARK: -- Properties
 	let previewImageView: UIImageView = {
 		let iv = UIImageView()
@@ -51,7 +51,7 @@ class PreviewPhotoContainerView: UIView {
 	}
 	
 	@objc func handleShare() {
-		guard let image = previewImageView.image else { return print("No image found") }
+		guard let image = previewImageView.image else { return }
 		let imageToShare = [image]
 		let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
 		activityViewController.popoverPresentationController?.sourceView = PreviewPhotoContainerView()
@@ -128,3 +128,22 @@ class PreviewPhotoContainerView: UIView {
 		fatalError("init(coder:) has not been implemented")
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

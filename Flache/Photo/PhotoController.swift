@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import Photos
 
-class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
+class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate, FLSliderDataSource {
 	
 	// MARK: -- Properties
 	let photoOutput = AVCapturePhotoOutput()
@@ -148,7 +148,7 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 													paddingTop: 0, paddingLeft: 0, paddingBottom: 25, paddingRight: 20, width: 50, height: 50)
 		
 		view.add(switchCameraButton)
-		switchCameraButton.anchor(top: nil, left: capturePhotoButton.rightAnchor, bottom: capturePhotoButton.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 16, paddingBottom: 25, paddingRight: 0, width: 50, height: 50)
+		switchCameraButton.anchor(top: nil, left: capturePhotoButton.rightAnchor, bottom: capturePhotoButton.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 16, paddingBottom: 23, paddingRight: 0, width: 50, height: 50)
 		
 		let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoom(pinch:)))
 		view.addGestureRecognizer(pinchGesture)
@@ -158,7 +158,6 @@ class PhotoController: UIViewController, AVCapturePhotoCaptureDelegate {
 	}
 	
 	fileprivate func setupButtons() {
-		// MARK: -- TODO: Add Portrait Mode button here!
 		let stackView = UIStackView(arrangedSubviews: [flashButton])
 		stackView.distribution = .fillEqually
 		view.add(stackView)
